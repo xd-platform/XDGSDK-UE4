@@ -7,7 +7,7 @@
 #include "XDGCommonBridge.h"
 
 /**
- * XDGCOMMON_API
+
  */
 class  XDGCommonIOS : public XDGCommonBridge
 {

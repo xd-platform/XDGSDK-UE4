@@ -16,7 +16,7 @@
 
 
 /**
- * XDGCOMMON_API
+
  */
 class  XDGCommonAndroid : public XDGCommonBridge
 {

@@ -43,7 +43,7 @@ public class XDGCommonUnreal4{
 
         if (!XDGSDK.isInitialized()) {
             XDGSDK.initSDK(gameActivity, success -> {
-               
+                nativeOnXDGSDKInitSucceed();
             });
         }
     }
@@ -51,6 +51,7 @@ public class XDGCommonUnreal4{
 
     public static boolean isInitialized(){
         print("点击是否初始化");
+        nativeOnXDGSDKInitSucceed();
         return XDGSDK.isInitialized();
     }
 
@@ -106,17 +107,17 @@ public class XDGCommonUnreal4{
         XDGSDK.share(shareFlavors, uri, message, new XDGShareCallback() {
             @Override
             public void shareSuccess() {
-
+                nativeOnXDGSDKShareSucceed(0);
             }
 
             @Override
             public void shareCancel() {
-                
+                nativeOnXDGSDKShareSucceed(1);
             }
 
             @Override
             public void shareFailed(String error) {
-                
+                nativeOnXDGSDKShareSucceed(2);
             }
         });
     }
@@ -139,28 +140,28 @@ public class XDGCommonUnreal4{
                                                 XDGSDK.share(shareFlavors, bitmap, new XDGShareCallback() {
                                                     @Override
                                                     public void shareSuccess() {
-                                                        
+                                                        nativeOnXDGSDKShareSucceed(0);
                                                     }
 
                                                     @Override
                                                     public void shareCancel() {
-                                                        
+                                                        nativeOnXDGSDKShareSucceed(1);
                                                     }
 
                                                     @Override
                                                     public void shareFailed(String error) {
-
+                                                        nativeOnXDGSDKShareSucceed(2);
                                                     }
                                                 });
                                             }
 
                                             @Override
                                             public void onFailure(Throwable throwable) {
-
+                                                        nativeOnXDGSDKShareSucceed(2);
                                             }
                                         });
                             } else {
-
+                                nativeOnXDGSDKShareSucceed(2);
                             }
                         }
                     });
@@ -217,5 +218,13 @@ public class XDGCommonUnreal4{
     private static void print(String msg){
         Log.e(" ====== sdk log ====== ", msg);
     }
+
+
+
+    //------JNI 回调-------
+    public native static void nativeOnXDGSDKInitSucceed();
+
+    //0成功，1取消，2失败
+    public native static void nativeOnXDGSDKShareSucceed(int code);
 
 }

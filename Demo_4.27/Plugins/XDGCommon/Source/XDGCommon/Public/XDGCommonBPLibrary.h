@@ -61,4 +61,7 @@ class XDGCOMMON_API UXDGCommonBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 	static bool IsCurrentUserPushServiceEnable();
+
+	UFUNCTION(BlueprintCallable, Category = "XDGCommon")
+	static void TestTap();
 };

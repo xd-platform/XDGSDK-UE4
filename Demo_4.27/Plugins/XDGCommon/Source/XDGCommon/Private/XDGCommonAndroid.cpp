@@ -4,7 +4,7 @@
 
 #include "XDGCommonAndroid.h"
 #include "Engine.h"
-#include "XDGCommon.h"
+#include "XDGCommonModule.h"
 
 #define UNREAL4_CLASS_NAME "com/xd/XDGCommonUnreal4"
 
@@ -329,4 +329,27 @@ bool XDGCommonAndroid::IsCurrentUserPushServiceEnable(){
     env->DeleteLocalRef(jXDSDKUnreal4Class);
     return isEnable;
 }
+
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKInitSucceed(JNIEnv *jenv, jclass thiz)
+    {
+        UE_LOG(LogTemp, Log, TEXT("点击了0"));
+        XDGCommonModule::OnXDGSDKInitSucceed.Broadcast();
+    }
+
+  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKShareSucceed(JNIEnv *jenv, jclass thiz, int32 code)
+    {
+        XDGCommonModule::OnXDGSDKShareSucceed.Broadcast((int)code);
+    }
+
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif
