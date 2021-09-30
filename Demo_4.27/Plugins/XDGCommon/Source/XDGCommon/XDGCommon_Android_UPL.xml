@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- init section is always evaluated once per architecture -->
+    <init>
+        <log text="XDSDK Android Build init"/>
+    </init>
+
+    <!-- optional additions to proguard -->
+    <proguardAdditions>
+        <insert>
+            -dontwarn com.xd.**
+            -keep class com.xd.XDGCommonUnreal4{
+                *;
+            }
+        </insert>
+    </proguardAdditions>
+
+    <!-- optional files or directories to copy to Intermediate/Android/APK -->
+   <resourceCopies>
+        <copyDir src="$S(PluginDir)/../../Source/XDGCommon/Android/libs/" dst="$S(BuildDir)/libs/" />
+        <copyDir src="$S(PluginDir)/../../Source/XDGCommon/Android/assets/" dst="$S(BuildDir)/assets/" />
+        <copyDir src="$S(PluginDir)/../../Build/Android/src/" dst="$S(BuildDir)/src/com/xd/" />
+    </resourceCopies>
+
+    <!-- optional updates applied to AndroidManifest.xml -->
+    <androidManifestUpdates>
+        <setStringFromAttribute result="PackageName" tag="manifest" name="package"/>
+        <addPermission android:name="android.permission.INTERNET"/>
+        <addPermission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <addPermission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
+        <addAttribute tag="application" name="android:usesCleartextTraffic" value="true"/>
+    </androidManifestUpdates>
+
+
+    <buildGradleAdditions>
+        <insert>
+            repositories {
+                flatDir{ dirs 'src/main/libs/' }
+            }
+            dependencies { 
+                implementation(name: 'XDGCommon_6.0.0',ext:'aar')
+                implementation(name: 'reactor-0.0.8.5',ext:'aar')
+                implementation(name: 'skynet-1.0.16',ext:'aar')
+                implementation 'androidx.appcompat:appcompat:1.3.1'
+
+                <!-- goole 只能11.8.0版本,与Engin aar-imports.txt一样-->
+                implementation "com.google.firebase:firebase-core:11.8.0"
+				implementation "com.google.firebase:firebase-messaging:11.8.0"
+
+                <!-- appsflyer -->
+                implementation "com.appsflyer:af-android-sdk:4.11.0"
+				implementation "com.android.installreferrer:installreferrer:2.2"
+                <!-- adjust -->
+                implementation "com.adjust.sdk:adjust-android:4.24.1"
+                <!-- Facebook -->
+				implementation "com.facebook.android:facebook-login:5.15.3"
+				implementation "com.facebook.android:facebook-share:5.15.3"
+				<!-- twitter -->
+				implementation "com.twitter.sdk.android:twitter:3.3.0"
+				implementation "com.twitter.sdk.android:tweet-composer:3.3.0"
+				<!-- line -->
+				implementation "com.linecorp:linesdk:5.0.1"
+        }
+        </insert>
+    </buildGradleAdditions>
+
+   
+   <gameActivityImportAdditions>   
+        <insert>
+            import com.xd.XDGCommonUnreal4;
+            import android.annotation.SuppressLint;
+        </insert>
+    </gameActivityImportAdditions>
+    <gameActivityOnCreateAdditions>
+        <insert>
+            XDGCommonUnreal4.onCreate(this);
+        </insert>
+    </gameActivityOnCreateAdditions>
+    <gameActivityOnResumeAdditions>
+	    <insert>
+            XDGCommonUnreal4.onResume(containerFrameLayout, this);
+	    </insert>
+    </gameActivityOnResumeAdditions>
+    <gameActivityOnStopAdditions>
+	    <insert>
+            XDGCommonUnreal4.onStop(this);
+	    </insert>
+    </gameActivityOnStopAdditions>
+    <gameActivityClassAdditions> 
+        <insert>
+         @SuppressLint("WrongConstant")
+         @Override
+         public void setRequestedOrientation(int requestedOrientation) {
+            super.setRequestedOrientation(XDGCommonUnreal4.orientation != -1 ? XDGCommonUnreal4.orientation : requestedOrientation);
+         }
+        </insert> 
+    </gameActivityClassAdditions>
+
+</root>
