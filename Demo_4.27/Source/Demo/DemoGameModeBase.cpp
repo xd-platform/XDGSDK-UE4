@@ -1,22 +1,23 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DemoGameModeBase.h"
-#include "XDGCommonModule.h"
-#include "Engine.h"
+#include "XDGCommon.h"
+#include <string.h>
 
 void ADemoGameModeBase::BeginPlay(){
-    XDGCommonModule::OnXDGSDKInitSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKInitSucceed);
-    XDGCommonModule::OnXDGSDKShareSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKShareSucceed);
+    FXDGCommonModule::OnXDGSDKInitSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKInitSucceed);
+    FXDGCommonModule::OnXDGSDKShareSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKShareSucceed);
+    UE_LOG(LogTemp, Log, TEXT("playingsgm"));
 }
 
 
-void ADemoGameModeBase::OnXDGSDKInitSucceed(){
-    UE_LOG(LogTemp, Log, TEXT("123点击了OnXDGSDKInitSucceed"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKInitSucceed");
+void ADemoGameModeBase::OnXDGSDKInitSucceed(const bool success){
+    UE_LOG(LogTemp, Log, TEXT("点击了OnXDGSDKInitSucceed"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKInitSucceed: " + FString::FromInt(success));
 }
 
 
 void ADemoGameModeBase::OnXDGSDKShareSucceed(const int32 code){
     UE_LOG(LogTemp, Log, TEXT("点击了OnXDGSDKShareSucceed"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKShareSucceed");
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKShareSucceed: " + FString::FromInt(code));
 }

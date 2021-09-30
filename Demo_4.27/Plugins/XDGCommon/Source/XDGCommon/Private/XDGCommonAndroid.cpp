@@ -4,7 +4,7 @@
 
 #include "XDGCommonAndroid.h"
 #include "Engine.h"
-#include "XDGCommonModule.h"
+#include "XDGCommon.h"
 
 #define UNREAL4_CLASS_NAME "com/xd/XDGCommonUnreal4"
 
@@ -336,15 +336,14 @@ extern "C"
 {
 #endif
 
-  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKInitSucceed(JNIEnv *jenv, jclass thiz)
+  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKInitSucceed(JNIEnv *jenv, jclass thiz, jboolean success)
     {
-        UE_LOG(LogTemp, Log, TEXT("点击了0"));
-        XDGCommonModule::OnXDGSDKInitSucceed.Broadcast();
+        FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success);
     }
 
   __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKShareSucceed(JNIEnv *jenv, jclass thiz, int32 code)
     {
-        XDGCommonModule::OnXDGSDKShareSucceed.Broadcast((int)code);
+        FXDGCommonModule::OnXDGSDKShareSucceed.Broadcast((int)code);
     }
 
 

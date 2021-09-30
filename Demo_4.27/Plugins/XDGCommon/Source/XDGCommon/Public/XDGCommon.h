@@ -7,23 +7,22 @@
 #include "CoreUObject.h"
 #include "Engine.h"
 
-class XDGCOMMON_API XDGCommonModule : public IModuleInterface
+class XDGCOMMON_API FXDGCommonModule : public IModuleInterface
 {
 public:
-
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 
-	 static inline XDGCommonModule& Get(){
-            return FModuleManager::LoadModuleChecked<XDGCommonModule>( "XDGCommon" );
+	 static inline FXDGCommonModule& Get(){
+            return FModuleManager::LoadModuleChecked<FXDGCommonModule>( "XDGCommon" );
       }
     
       static inline bool IsAvailable(){
             return FModuleManager::Get().IsModuleLoaded( "XDGCommon" );
       }
 
-	DECLARE_MULTICAST_DELEGATE(FXDGSDKInitSucceed);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKInitSucceed, const bool);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKShareSucceed, const int32);
    
 

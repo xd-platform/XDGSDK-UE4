@@ -43,7 +43,7 @@ public class XDGCommonUnreal4{
 
         if (!XDGSDK.isInitialized()) {
             XDGSDK.initSDK(gameActivity, success -> {
-                nativeOnXDGSDKInitSucceed();
+                nativeOnXDGSDKInitSucceed(success);
             });
         }
     }
@@ -51,7 +51,6 @@ public class XDGCommonUnreal4{
 
     public static boolean isInitialized(){
         print("点击是否初始化");
-        nativeOnXDGSDKInitSucceed();
         return XDGSDK.isInitialized();
     }
 
@@ -222,7 +221,7 @@ public class XDGCommonUnreal4{
 
 
     //------JNI 回调-------
-    public native static void nativeOnXDGSDKInitSucceed();
+    public native static void nativeOnXDGSDKInitSucceed(boolean success);
 
     //0成功，1取消，2失败
     public native static void nativeOnXDGSDKShareSucceed(int code);
