@@ -28,7 +28,7 @@
         <addPermission android:name="android.permission.INTERNET"/>
         <addPermission android:name="android.permission.ACCESS_NETWORK_STATE"/>
         <addPermission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+        <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
         <addAttribute tag="application" name="android:usesCleartextTraffic" value="true"/>
     </androidManifestUpdates>

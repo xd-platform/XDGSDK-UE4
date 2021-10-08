@@ -6,7 +6,7 @@
 #include "Engine.h"
 #include "XDGCommon.h"
 
-#define UNREAL4_CLASS_NAME "com/xd/XDGCommonUnreal4"
+#define UNREAL4_CLASS_NAME_COMMON "com/xd/XDGCommonUnreal4"
 
 XDGCommonAndroid::XDGCommonAndroid()
 {
@@ -20,7 +20,7 @@ XDGCommonAndroid::~XDGCommonAndroid()
 FString XDGCommonAndroid::GetSDKVersionName(){
     FString version = "";
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "getSDKVersionName";
@@ -40,7 +40,7 @@ FString XDGCommonAndroid::GetSDKVersionName(){
 
 void XDGCommonAndroid::SetLanguage(int32 langType){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "setLanguage";
@@ -57,7 +57,7 @@ void XDGCommonAndroid::SetLanguage(int32 langType){
 
 void XDGCommonAndroid::InitSDK(){
    JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "initSDK";
@@ -76,7 +76,7 @@ void XDGCommonAndroid::InitSDK(){
 bool XDGCommonAndroid::IsInitialized(){
     bool isInitialized = false;
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "isInitialized";
@@ -94,7 +94,7 @@ bool XDGCommonAndroid::IsInitialized(){
 
 void XDGCommonAndroid::Report(FString serverId, FString roleId, FString roleName){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "report";
@@ -119,7 +119,7 @@ void XDGCommonAndroid::Report(FString serverId, FString roleId, FString roleName
 
 void XDGCommonAndroid::StoreReview(){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "storeReview";
@@ -136,7 +136,7 @@ void XDGCommonAndroid::StoreReview(){
 
 void XDGCommonAndroid::ShareFlavors(int32 type, FString uri, FString message){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "shareFlavors";
@@ -159,7 +159,7 @@ void XDGCommonAndroid::ShareFlavors(int32 type, FString uri, FString message){
 
 void XDGCommonAndroid::ShareImage(int32 type, FString imagePath){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "shareImage";
@@ -179,7 +179,7 @@ void XDGCommonAndroid::ShareImage(int32 type, FString imagePath){
 
 void XDGCommonAndroid::TrackUser(FString userId){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "trackUser";
@@ -200,7 +200,7 @@ void XDGCommonAndroid::TrackUser(FString userId){
 void XDGCommonAndroid::TrackRole(FString serverId, FString roleId, FString roleName, int32 level){
 
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "trackRole";
@@ -226,7 +226,7 @@ void XDGCommonAndroid::TrackRole(FString serverId, FString roleId, FString roleN
 
 void XDGCommonAndroid::TrackEvent(FString eventName){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "trackEvent";
@@ -246,7 +246,7 @@ void XDGCommonAndroid::TrackEvent(FString eventName){
 
 void XDGCommonAndroid::TrackAchievement(){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "trackAchievement";
@@ -263,7 +263,7 @@ void XDGCommonAndroid::TrackAchievement(){
 
 void XDGCommonAndroid::EventCompletedTutorial(){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "eventCompletedTutorial";
@@ -280,7 +280,7 @@ void XDGCommonAndroid::EventCompletedTutorial(){
 
 void XDGCommonAndroid::EventCreateRole(){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "eventCreateRole";
@@ -297,7 +297,7 @@ void XDGCommonAndroid::EventCreateRole(){
 
 void XDGCommonAndroid::SetCurrentUserPushServiceEnable(bool enable){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "setCurrentUserPushServiceEnable";
@@ -315,7 +315,7 @@ void XDGCommonAndroid::SetCurrentUserPushServiceEnable(bool enable){
 bool XDGCommonAndroid::IsCurrentUserPushServiceEnable(){
      bool isEnable = false;
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME);
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
     {
         const char *strMethod = "isCurrentUserPushServiceEnable";
@@ -345,7 +345,6 @@ extern "C"
     {
         FXDGCommonModule::OnXDGSDKShareSucceed.Broadcast((int)code);
     }
-
 
 #ifdef __cplusplus
 }

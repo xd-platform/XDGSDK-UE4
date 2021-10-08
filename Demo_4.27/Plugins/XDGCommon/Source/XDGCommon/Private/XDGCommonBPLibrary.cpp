@@ -76,7 +76,3 @@ bool UXDGCommonBPLibrary::IsCurrentUserPushServiceEnable(){
    return GetXDGCommonBridge()->IsCurrentUserPushServiceEnable();
 }
 
-void UXDGCommonBPLibrary::TestTap(){
-    UE_LOG(LogTemp, Log, TEXT("Your message233"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKShareSucceed");
-}
