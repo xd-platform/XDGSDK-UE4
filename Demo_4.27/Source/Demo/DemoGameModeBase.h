@@ -33,4 +33,24 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 	void OnXDGSDKUserStateChanged(const int32, const FString&);
 
 	void OnXDGSDKLoginSync(const FString&);
+
+	//XDGPayment
+	void OnXDGSDKPaymentSucceed(const FString&);
+
+    void OnXDGSDKPaymentFailed(const int32, const FString&);
+
+    void OnXDGSDKQueryProductIdsSucceed(const FString&);
+
+    void OnXDGSDKQueryProductIdsFailed(const int32, const FString&);
+
+    void OnXDGSDKQueryRestoredPurchasesSucceed(const FString&);
+
+    void OnXDGSDKQueryRestoredPurchasesFailed(const int32, const FString&);
+
+    void OnXDGSDKPayWithWebComplete(const FString&);
+
+    void OnXDGSDKCheckRefundStatusSucceed(const FString&);
+
+    void OnXDGSDKCheckRefundStatusFailed(const int32, const FString&);
+
 };
