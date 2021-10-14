@@ -2,7 +2,7 @@
   "app_id": 1111,
   "client_id": "OpkoNJSFSDKD2qpE",
   "game_name": "TDSGlobalDemo",
-  "domian": "tdsglobal.com",
+  "domain": "tdsglobal.com",
   "channel": "Google Play",
   "adjust": {
     "app_token": "5sqgsqxswe0w",

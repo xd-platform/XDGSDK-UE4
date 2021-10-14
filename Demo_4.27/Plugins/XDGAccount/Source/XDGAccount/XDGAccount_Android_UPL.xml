@@ -26,7 +26,7 @@
     <buildGradleAdditions>
         <insert>
             dependencies { 
-                implementation(name: 'XDGAccount_6.0.7',ext:'aar')
+                implementation(name: 'XDGAccount_6.0.0',ext:'aar')
             }
         </insert>
     </buildGradleAdditions>

@@ -2,6 +2,8 @@ package com.xd;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.taptap.reactor.rxandroid.schedulers.AndroidSchedulers;
 import com.taptap.reactor.schedulers.Schedulers;
@@ -79,14 +81,19 @@ public class XDGAccountUnreal4{
     public static void loginByType(String loginType){
         print("点击  LoginByType");
 
-        if (!TextUtils.isEmpty(loginType)) {
-            XDGAccount.loginByType(LoginEntriesHelper.getLoginEntryTypeByName(loginType), new Callback<XDGUser>() {
-                @Override
-                public void onCallback(XDGUser user, XDGError tdsServerError) {
-                    constructorUserForBridge(user, tdsServerError, true);
+         new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                if (!TextUtils.isEmpty(loginType)) {
+                    XDGAccount.loginByType(LoginEntriesHelper.getLoginEntryTypeByName(loginType), new Callback<XDGUser>() {
+                        @Override
+                        public void onCallback(XDGUser user, XDGError tdsServerError) {
+                            constructorUserForBridge(user, tdsServerError, true);
+                        }
+                    });
                 }
-            });
-        }
+            }
+        });
     }
 	
     public static void addUserStatusChangeCallback(){
