@@ -79,5 +79,194 @@ public class XDGCommon : ModuleRules
                 Path.Combine(ModuleDirectory, "XDGCommon_Android_UPL.xml")
             );
         }
+
+
+		 if (Target.Platform == UnrealTargetPlatform.IOS) {
+			   PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"AdjustSdk",
+						"../ThirdParty/AdjustSdk.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"AppsFlyerLib",
+						"../ThirdParty/AppsFlyerLib.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FBSDKCoreKit",
+						"../ThirdParty/FBSDKCoreKit.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FBSDKLoginKit",
+						"../ThirdParty/FBSDKLoginKit.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FBSDKShareKit",
+						"../ThirdParty/FBSDKShareKit.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"LineSDK",
+						"../ThirdParty/LineSDK.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"TDSGTwitterLoginKit",
+						"../ThirdParty/TDSGTwitterLoginKit.embeddedframework.zip"
+                    )
+                );
+
+				//17star
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"GoogleSignIn",
+						"../ThirdParty/GoogleSignIn.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"AppAuth",
+						"../ThirdParty/AppAuth.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"GTMAppAuth",
+						"../ThirdParty/GTMAppAuth.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"GTMSessionFetcher",
+						"../ThirdParty/GTMSessionFetcher.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseAnalytics",
+						"../ThirdParty/FirebaseAnalytics.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseAuth",
+						"../ThirdParty/FirebaseAuth.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseCore",
+						"../ThirdParty/FirebaseCore.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseCoreDiagnostics",
+						"../ThirdParty/FirebaseCoreDiagnostics.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseCrashlytics",
+						"../ThirdParty/FirebaseCrashlytics.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseInstallations",
+						"../ThirdParty/FirebaseInstallations.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseInstanceID",
+						"../ThirdParty/FirebaseInstanceID.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FirebaseMessaging",
+						"../ThirdParty/FirebaseMessaging.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"GoogleAppMeasurement",
+						"../ThirdParty/GoogleAppMeasurement.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"GoogleDataTransport",
+						"../ThirdParty/GoogleDataTransport.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"GoogleUtilities",
+						"../ThirdParty/GoogleUtilities.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"nanopb",
+						"../ThirdParty/nanopb.embeddedframework.zip"
+                    )
+                );
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"PromisesObjC",
+						"../ThirdParty/PromisesObjC.embeddedframework.zip"
+                    )
+                );
+
+				PublicFrameworks.AddRange(
+					new string[]{
+						"Accelerate",
+						"SystemConfiguration",
+						"WebKit",
+						"SystemConfiguration",
+						"CoreTelephony",
+						"MobileCoreServices",
+						"Security",
+						"SafariServices",
+						"AuthenticationServices"
+					}
+				);
+
+				PublicSystemLibraryPaths.Add("/usr/lib/swift");
+				PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility51.a"));
+                PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility50.a"));
+                PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibilityDynamicReplacements.a")); 
+
+				//bundle
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "../ThirdParty/GoogleSignIn.bundle")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "../ThirdParty/LineSDKResource.bundle")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "../ThirdParty/XDGResources.bundle")));
+
+                // Add framework
+                PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"XDGCommonSDK",
+						"../ThirdParty/XDGCommonSDK.embeddedframework.zip"
+                    )
+                );
+            
+                AdditionalPropertiesForReceipt.Add(
+                    "IOSPlugin", 
+                    Path.Combine(ModuleDirectory, "XDGCommon_iOS_UPL.xml")
+                );
+            }
+
+
 	}
 }

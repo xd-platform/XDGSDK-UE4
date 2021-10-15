@@ -5,6 +5,7 @@
 #include "Core.h"
 #include "CoreMinimal.h"
 #include "XDGAccountBridge.h"
+// #import <Foundation/Foundation.h>
 
 /**
  * 
@@ -23,3 +24,6 @@ public:
 	void Logout();
 	void LoginSync();
 };
+
+// @interface XDGAccountTool : NSObject
+// @end

@@ -9,10 +9,7 @@ public class Demo : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" ,"TapCommon","TapBootstrap","TapLogin","TapDB","TapMoment","XDGCommon","XDGAccount","XDGPayment"});
-
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
-
-		PublicIncludePaths.AddRange(new string[] {"XDGCommon/Public" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

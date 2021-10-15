@@ -2,6 +2,17 @@
 
 
 #include "XDGCommonIOS.h"
+#include "Engine.h"
+#include "XDGCommon.h"
+
+#import <Foundation/Foundation.h>
+// #import <XDGCommonSDK/XDGSDK.h>
+// #import <XDGCommonSDK/XDGShare.h>
+// #import <XDGCommonSDK/XDGMessageManager.h>
+// #import <XDGCommonSDK/XDGTrackerManager.h>
+// #import <XDGCommonSDK/XDGSDKSettings.h>
+// #import <TDSGlobalSDKCommonKit/NSDictionary+TDSGlobalJson.h>
+// #import "XDGGameDataManager.h"
 
 XDGCommonIOS::XDGCommonIOS()
 {
@@ -13,18 +24,36 @@ XDGCommonIOS::~XDGCommonIOS()
 
 
 FString XDGCommonIOS::GetSDKVersionName(){
-    return "1.0";
+    // FString version = "";
+    // NSString * nVersion = [XDGSDK getSDKVersionName];
+    // version = UTF8_TO_TCHAR([nVersion UTF8String]);
+    // NSLog(@"获取版本号 %@", nVersion);
+    // return version;
+
+    return "";
 }
 
 void XDGCommonIOS::SetLanguage(int32 langType){
-    
+    // [XDGSDKSettings setLanguage:langType];
+    //  NSLog(@"设置语言 %d", langType);
 }
 
 void XDGCommonIOS::InitSDK(){
-    
+    // [XDGSDK initSDK:^(BOOL success) {
+    //     if (success) {
+    //         NSLog(@"初始化 成功");
+    //     }else {
+    //         NSLog(@"初始化 失败");
+    //     }
+    //     FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success);
+    // }];
 }
 
 bool XDGCommonIOS::IsInitialized(){
+    // bool isLoggedIn = false;
+    // isLoggedIn = [XDGGameDataManager isGameInited];
+    // NSLog(@"是否初始化了 %d", isLoggedIn);
+    // return isLoggedIn;
     return true;
 }
 

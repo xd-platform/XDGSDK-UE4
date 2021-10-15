@@ -78,5 +78,15 @@ public class XDGAccount : ModuleRules
                 Path.Combine(ModuleDirectory, "XDGAccount_Android_UPL.xml")
             );
         }	
+
+		if (Target.Platform == UnrealTargetPlatform.IOS) {
+            PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"XDGAccountSDK",
+						"../ThirdParty/XDGAccountSDK.embeddedframework.zip"
+                    )
+                );
+        }	
+		
 	}
 }

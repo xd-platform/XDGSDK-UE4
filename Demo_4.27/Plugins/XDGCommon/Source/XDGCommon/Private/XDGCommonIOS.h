@@ -6,6 +6,8 @@
 #include "CoreMinimal.h"
 #include "XDGCommonBridge.h"
 
+#import <XDGCommonSDK/XDGSDK.h>
+
 /**
 
  */
