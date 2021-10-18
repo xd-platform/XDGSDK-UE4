@@ -1,11 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+#if PLATFORM_IOS
 #pragma once
 
 #include "Core.h"
 #include "CoreMinimal.h"
 #include "XDGAccountBridge.h"
-// #import <Foundation/Foundation.h>
+
+#import <Foundation/Foundation.h>
+#import <XDGAccountSDK/XDGAccount.h>
+#import <XDGCommonSDK/XDGUser.h>
+#import <XDGCommonSDK/XDGAccessToken.h>
+#import <TDSGlobalSDKCommonKit/NSDictionary+TDSGlobalJson.h>
 
 /**
  * 
@@ -25,5 +30,9 @@ public:
 	void LoginSync();
 };
 
-// @interface XDGAccountTool : NSObject
-// @end
+@interface XDGAccountTool : NSObject
+
++ (NSString *)bridgeUserCallback:(XDGUser *)user error:(NSError *)error;
+@end
+
+#endif 

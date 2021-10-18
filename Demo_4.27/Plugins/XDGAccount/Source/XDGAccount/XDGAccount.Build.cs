@@ -54,7 +54,8 @@ public class XDGAccount : ModuleRules
 				"CoreUObject",
 				"Slate",
 				"SlateCore",
-				"UMG"
+				"UMG",
+				"XDGCommon"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

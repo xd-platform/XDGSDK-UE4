@@ -249,15 +249,25 @@ public class XDGCommon : ModuleRules
                 PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibilityDynamicReplacements.a")); 
 
 				//bundle
-				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "../ThirdParty/GoogleSignIn.bundle")));
-				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "../ThirdParty/LineSDKResource.bundle")));
-				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "../ThirdParty/XDGResources.bundle")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/GoogleSignIn.bundle")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/LineSDKResource.bundle")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/XDGResources.bundle")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/XDG-Info.plist")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/GoogleService-Info.plist")));
+				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/TDSGlobal-InfoRO.plist")));
 
                 // Add framework
                 PublicAdditionalFrameworks.Add(
                     new Framework(
 						"XDGCommonSDK",
 						"../ThirdParty/XDGCommonSDK.embeddedframework.zip"
+                    )
+                );
+
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"TDSGlobalSDKCommonKit",
+						"../ThirdParty/TDSGlobalSDKCommonKit.embeddedframework.zip"
                     )
                 );
             

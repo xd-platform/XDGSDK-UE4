@@ -36,7 +36,8 @@
 			"utility": "cpp",
 			"valarray": "cpp",
 			"vector": "cpp",
-			"__locale": "cpp"
+			"__locale": "cpp",
+			"chrono": "cpp"
 		}
 	},
 	"extensions": {

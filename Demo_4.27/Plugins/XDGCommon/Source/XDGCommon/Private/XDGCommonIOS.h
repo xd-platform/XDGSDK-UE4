@@ -1,12 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#if PLATFORM_IOS
 #pragma once
 
 #include "Core.h"
 #include "CoreMinimal.h"
 #include "XDGCommonBridge.h"
-
-#import <XDGCommonSDK/XDGSDK.h>
 
 /**
 
@@ -37,3 +36,5 @@ public:
 	void SetCurrentUserPushServiceEnable(bool enable);
 	bool IsCurrentUserPushServiceEnable();
 };
+
+#endif
