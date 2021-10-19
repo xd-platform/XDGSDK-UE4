@@ -7,9 +7,16 @@
 #include "CoreMinimal.h"
 #include "XDGCommonBridge.h"
 
-/**
+#import <Foundation/Foundation.h>
+#import <XDGCommonSDK/XDGSDK.h>
+#import <XDGCommonSDK/XDGShare.h>
+#import <XDGCommonSDK/XDGMessageManager.h>
+#import <XDGCommonSDK/XDGTrackerManager.h>
+#import <XDGCommonSDK/XDGSDKSettings.h>
+#import <XDGCommonSDK/XDGGameDataManager.h>
+#import <TDSGlobalSDKCommonKit/NSDictionary+TDSGlobalJson.h>
 
- */
+
 class  XDGCommonIOS : public XDGCommonBridge
 {
 public:
@@ -36,5 +43,9 @@ public:
 	void SetCurrentUserPushServiceEnable(bool enable);
 	bool IsCurrentUserPushServiceEnable();
 };
+
+@interface XDGUE4CommonTool : NSObject
++ (void)shareWithResult:(NSError *)error cancel:(BOOL)cancel;
+@end
 
 #endif

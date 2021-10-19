@@ -30,9 +30,8 @@ public:
 	void LoginSync();
 };
 
-@interface XDGAccountTool : NSObject
-
-+ (NSString *)bridgeUserCallback:(XDGUser *)user error:(NSError *)error;
+@interface XDGUE4AccountTool : NSObject
++ (void)bridgeUserCallback:(XDGUser *)user error:(NSError *)error isLogin: (Boolean)isLogin;
 @end
 
 #endif 
