@@ -1,9 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#if PLATFORM_IOS
 #pragma once
 
 #include "CoreMinimal.h"
 #include "XDGPaymentBridge.h"
+
+#import <Foundation/Foundation.h>
+#import <XDGPaymentSDK/XDGOrderInfo.h>
+#import <XDGPaymentSDK/XDGTransactionInfo.h>
+#import <XDGPaymentSDK/XDGPayment.h>
+#import <XDGPaymentSDK/XDGProductInfo.h>
+#import <TDSGlobalSDKCommonKit/NSDictionary+TDSGlobalJson.h>
 
 /**
  * 
@@ -31,26 +39,40 @@ public:
 
 	//安卓独有方法
 	void RestorePurchase(FString purchaseToken,
-								FString productId,
-								FString orderId,
-								FString roleId,
-								FString serverId,
-								FString ext);
+						FString productId,
+						FString orderId,
+						FString roleId,
+						FString serverId,
+						FString ext);
 
 	void PayWithWeb(FString serverId,
-							FString roleId);
+					FString roleId);
 
 	void PayWithChannel(FString orderId,
-								FString productId,
-								FString roleId,
-								FString serverId,
-								FString ext);
+						FString productId,
+						FString roleId,
+						FString serverId,
+						FString ext);
     
 	//iOS独有方法
 	void PurchaseToken(FString transactionIdentifier,
-								FString productIdentifier,
-								FString orderId,
-								FString roleId,
-								FString serverId,
-								FString ext);
+						FString productIdentifier,
+						FString orderId,
+						FString roleId,
+						FString serverId,
+						FString ext);
 };
+
+
+@interface XDGUE4PaymentTool : NSObject
+
++(NSArray*)getProductIdList:(NSString*)listJson;
+
++ (void)bridgePayCallback:(XDGOrderInfo *)orderInfo error:(NSError *)error;
+
++ (void)bridgeRefundStatusWithCode:(XDGRepayMentCode)code msg:(NSString *)msg data:(NSDictionary *)data;
+
+@end
+
+
+#endif

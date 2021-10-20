@@ -16,20 +16,25 @@ XDGAccountIOS::~XDGAccountIOS()
 }
 
 void XDGAccountIOS::Login(){
-     [XDGAccount login:^(XDGUser * _Nullable result, NSError * _Nullable error) {
-        [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [XDGAccount login:^(XDGUser * _Nullable result, NSError * _Nullable error) {
+           [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
+        }]; 
+    });
 }
 
 void XDGAccountIOS::LoginByType(FString loginType){
-    LoginEntryType type = [XDGEntryType entryTypeByString:loginType.GetNSString()];
-    [XDGAccount loginByType:type loginHandler:^(XDGUser * _Nullable result, NSError * _Nullable error) {
-        [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LoginEntryType type = [XDGEntryType entryTypeByString:loginType.GetNSString()];
+        [XDGAccount loginByType:type loginHandler:^(XDGUser * _Nullable result, NSError * _Nullable error) {
+            [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
+        }]; 
+    });
 }
 
 void XDGAccountIOS::AddUserStatusChangeCallback(){
     [XDGAccount addUserStatusChangeCallback:^(XDGUserStateChangeCode userStateChangeCode,NSString *message) {
+        NSLog(@"添加回调 %d  %@", (int)userStateChangeCode, message);
         FXDGAccountModule::OnXDGSDKUserStateChanged.Broadcast((int)userStateChangeCode, UTF8_TO_TCHAR([message?:@"" UTF8String]));
     }];
 }
@@ -41,12 +46,16 @@ void XDGAccountIOS::GetUser(){
 }
 
 void XDGAccountIOS::OpenUserCenter(){
-    [XDGAccount openUserCenter];
+     dispatch_async(dispatch_get_main_queue(), ^{
+        [XDGAccount openUserCenter];
+        NSLog(@"打开用户中心");
+    });
 }
 
 void XDGAccountIOS::Logout(){
     dispatch_async(dispatch_get_main_queue(), ^{
         [XDGAccount logout];
+        NSLog(@"点击退出登录");
     });
 }
 
@@ -56,6 +65,8 @@ void XDGAccountIOS::LoginSync(){
         if(result != nil){
           sessionToken = [result objectForKey:@"sessionToken"];
         }
+
+        NSLog(@"sessionToken 值： %@", sessionToken);
         FXDGAccountModule::OnXDGSDKLoginSync.Broadcast(UTF8_TO_TCHAR([sessionToken UTF8String]));
     }];
 }
@@ -71,7 +82,8 @@ void XDGAccountIOS::LoginSync(){
             FXDGAccountModule::OnXDGSDKGetUserFailed.Broadcast((int)error.code, UTF8_TO_TCHAR([error.localizedDescription?:@"" UTF8String]));
         }   
         NSLog(@"失败：%@", error.localizedDescription?:@"");
-    }else{
+
+    }else if(user != nil){
          NSDictionary *userDic = @{
             @"userId":user.userId,
             @"name":user.name?:@"",
@@ -92,6 +104,15 @@ void XDGAccountIOS::LoginSync(){
             FXDGAccountModule::OnXDGSDKGetUserSucceed.Broadcast(UTF8_TO_TCHAR([res UTF8String]));
         }   
         NSLog(@"成功：%@", res);
+
+    }else{
+        if(isLogin){
+            FXDGAccountModule::OnXDGSDKLoginFailed.Broadcast(-1, "失败");
+        }else{
+            FXDGAccountModule::OnXDGSDKGetUserFailed.Broadcast(-1, "失败");
+        }   
+        
+        NSLog(@"失败2");
     }
 }
 

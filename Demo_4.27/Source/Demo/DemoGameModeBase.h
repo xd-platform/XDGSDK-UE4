@@ -19,7 +19,7 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 	void OnXDGSDKInitSucceed(const bool);
 
     //0成功，1取消，2失败
-    void OnXDGSDKShareSucceed(const int32);
+    void OnXDGSDKShareCompleted(const int32);
 
     //XDGAccount 
 	void OnXDGSDKLoginSucceed(const FString&);
@@ -35,7 +35,7 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 	void OnXDGSDKLoginSync(const FString&);
 
 	//XDGPayment
-	void OnXDGSDKPaymentSucceed(const FString&);
+	void OnXDGSDKPaymentSucceed(const FString&, const FString&, const FString&, const FString&);
 
     void OnXDGSDKPaymentFailed(const int32, const FString&);
 
@@ -47,7 +47,7 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 
     void OnXDGSDKQueryRestoredPurchasesFailed(const int32, const FString&);
 
-    void OnXDGSDKPayWithWebComplete(const FString&);
+    void OnXDGSDKPayWithWebCompleted(const FString&, const FString&, const int32, const FString&);
 
     void OnXDGSDKCheckRefundStatusSucceed(const FString&);
 

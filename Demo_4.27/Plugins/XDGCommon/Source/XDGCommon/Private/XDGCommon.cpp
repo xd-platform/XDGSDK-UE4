@@ -5,7 +5,7 @@
 #define LOCTEXT_NAMESPACE "FXDGCommonModule"
 
 FXDGCommonModule::FXDGSDKInitSucceed FXDGCommonModule::OnXDGSDKInitSucceed;
-FXDGCommonModule::FXDGSDKShareSucceed FXDGCommonModule::OnXDGSDKShareSucceed;
+FXDGCommonModule::FXDGSDKShareCompleted FXDGCommonModule::OnXDGSDKShareCompleted;
 
 IMPLEMENT_MODULE(FXDGCommonModule, XDGCommon)
 

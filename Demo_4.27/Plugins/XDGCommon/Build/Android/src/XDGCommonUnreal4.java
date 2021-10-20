@@ -2,6 +2,7 @@ package com.xd;
 
 import com.xd.intl.common.XDGSDK;
 
+import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.app.Activity;
@@ -106,17 +107,17 @@ public class XDGCommonUnreal4{
         XDGSDK.share(shareFlavors, uri, message, new XDGShareCallback() {
             @Override
             public void shareSuccess() {
-                nativeOnXDGSDKShareSucceed(0);
+                nativeOnXDGSDKShareCompleted(0);
             }
 
             @Override
             public void shareCancel() {
-                nativeOnXDGSDKShareSucceed(1);
+                nativeOnXDGSDKShareCompleted(1);
             }
 
             @Override
             public void shareFailed(String error) {
-                nativeOnXDGSDKShareSucceed(2);
+                nativeOnXDGSDKShareCompleted(2);
             }
         });
     }
@@ -139,28 +140,28 @@ public class XDGCommonUnreal4{
                                                 XDGSDK.share(shareFlavors, bitmap, new XDGShareCallback() {
                                                     @Override
                                                     public void shareSuccess() {
-                                                        nativeOnXDGSDKShareSucceed(0);
+                                                        nativeOnXDGSDKShareCompleted(0);
                                                     }
 
                                                     @Override
                                                     public void shareCancel() {
-                                                        nativeOnXDGSDKShareSucceed(1);
+                                                        nativeOnXDGSDKShareCompleted(1);
                                                     }
 
                                                     @Override
                                                     public void shareFailed(String error) {
-                                                        nativeOnXDGSDKShareSucceed(2);
+                                                        nativeOnXDGSDKShareCompleted(2);
                                                     }
                                                 });
                                             }
 
                                             @Override
                                             public void onFailure(Throwable throwable) {
-                                                        nativeOnXDGSDKShareSucceed(2);
+                                                        nativeOnXDGSDKShareCompleted(2);
                                             }
                                         });
                             } else {
-                                nativeOnXDGSDKShareSucceed(2);
+                                nativeOnXDGSDKShareCompleted(2);
                             }
                         }
                     });
@@ -191,7 +192,7 @@ public class XDGCommonUnreal4{
     }
 
 
-     public static void eventCreateRole(){
+    public static void eventCreateRole(){
          print("点击 eventCreateRole");
         
     }
@@ -201,8 +202,11 @@ public class XDGCommonUnreal4{
         Display display = activity.getWindowManager().getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
         display.getRealMetrics(dm);
-        width = dm.widthPixels;
-        height = dm.heightPixels;
+
+        if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            width = dm.widthPixels;
+            height = dm.heightPixels;
+        }
     }
 
     public static void onStop(final Activity activity) {
@@ -210,6 +214,9 @@ public class XDGCommonUnreal4{
     }
 
     public static void onResume(View ueContainerView, final Activity activity) {
+        if(width <= 0 || height <= 0 || width < height){
+            return;
+        }
         ueContainerView.getLayoutParams().width = width;
         ueContainerView.getLayoutParams().height = height;
     }
@@ -219,11 +226,10 @@ public class XDGCommonUnreal4{
     }
 
 
-
     //------JNI 回调-------
     public native static void nativeOnXDGSDKInitSucceed(boolean success);
 
     //0成功，1取消，2失败
-    public native static void nativeOnXDGSDKShareSucceed(int code);
+    public native static void nativeOnXDGSDKShareCompleted(int code);
 
 }

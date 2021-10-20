@@ -313,7 +313,7 @@ void XDGCommonAndroid::SetCurrentUserPushServiceEnable(bool enable){
 
 
 bool XDGCommonAndroid::IsCurrentUserPushServiceEnable(){
-     bool isEnable = false;
+    bool isEnable = false;
     JNIEnv *env = FAndroidApplication::GetJavaEnv();
     auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
     if (jXDSDKUnreal4Class)
@@ -341,9 +341,9 @@ extern "C"
         FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success);
     }
 
-  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKShareSucceed(JNIEnv *jenv, jclass thiz, int32 code)
+  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKShareCompleted(JNIEnv *jenv, jclass thiz, int32 code)
     {
-        FXDGCommonModule::OnXDGSDKShareSucceed.Broadcast((int)code);
+        FXDGCommonModule::OnXDGSDKShareCompleted.Broadcast((int)code);
     }
 
 #ifdef __cplusplus

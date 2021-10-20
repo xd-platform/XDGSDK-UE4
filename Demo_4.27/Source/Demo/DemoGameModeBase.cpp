@@ -9,7 +9,7 @@
 void ADemoGameModeBase::BeginPlay(){
     //XDGCommon
     FXDGCommonModule::OnXDGSDKInitSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKInitSucceed);
-    FXDGCommonModule::OnXDGSDKShareSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKShareSucceed);
+    FXDGCommonModule::OnXDGSDKShareCompleted.AddUObject(this, &ADemoGameModeBase::OnXDGSDKShareCompleted);
 
     //XDGAccount
     FXDGAccountModule::OnXDGSDKLoginSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKLoginSucceed);
@@ -26,7 +26,7 @@ void ADemoGameModeBase::BeginPlay(){
     FXDGPaymentModule::OnXDGSDKQueryProductIdsFailed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKQueryProductIdsFailed);
     FXDGPaymentModule::OnXDGSDKQueryRestoredPurchasesSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKQueryRestoredPurchasesSucceed);
     FXDGPaymentModule::OnXDGSDKQueryRestoredPurchasesFailed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKQueryRestoredPurchasesFailed);
-    FXDGPaymentModule::OnXDGSDKPayWithWebComplete.AddUObject(this, &ADemoGameModeBase::OnXDGSDKPayWithWebComplete);
+    FXDGPaymentModule::OnXDGSDKPayWithWebCompleted.AddUObject(this, &ADemoGameModeBase::OnXDGSDKPayWithWebCompleted);
     FXDGPaymentModule::OnXDGSDKCheckRefundStatusSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKCheckRefundStatusSucceed);
     FXDGPaymentModule::OnXDGSDKCheckRefundStatusFailed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKCheckRefundStatusFailed);
 
@@ -40,9 +40,9 @@ void ADemoGameModeBase::OnXDGSDKInitSucceed(const bool success){
 }
 
 
-void ADemoGameModeBase::OnXDGSDKShareSucceed(const int32 code){
-    UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKShareSucceed"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKShareSucceed: " + FString::FromInt(code));
+void ADemoGameModeBase::OnXDGSDKShareCompleted(const int32 code){
+    UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKShareCompleted"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKShareCompleted: " + FString::FromInt(code));
 }
 
 
@@ -79,8 +79,7 @@ void ADemoGameModeBase::OnXDGSDKLoginSync(const FString& sessionToken){
 
 
 //XDGPayment
-
-void ADemoGameModeBase::OnXDGSDKPaymentSucceed(const FString& resultJson){
+void ADemoGameModeBase::OnXDGSDKPaymentSucceed(const FString& orderId, const FString& productId, const FString& serverId, const FString& roleId){
     UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKPaymentSucceed"));
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKPaymentSucceed: ");
 }
@@ -110,9 +109,9 @@ void ADemoGameModeBase::OnXDGSDKQueryRestoredPurchasesFailed(const int32 code, c
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKQueryRestoredPurchasesFailed: ");
 }
 
-void ADemoGameModeBase::OnXDGSDKPayWithWebComplete(const FString& resultJson){
-    UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKPayWithWebComplete"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKPayWithWebComplete: ");
+void ADemoGameModeBase::OnXDGSDKPayWithWebCompleted(const FString& serverId, const FString& roleId, const int32 code,  const FString& errorMsg){
+    UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKPayWithWebCompleted"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKPayWithWebCompleted: ");
 }
 
 void ADemoGameModeBase::OnXDGSDKCheckRefundStatusSucceed(const FString& resultJson){

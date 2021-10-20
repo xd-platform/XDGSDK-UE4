@@ -55,7 +55,8 @@ public class XDGPayment : ModuleRules
 				"Slate",
 				"SlateCore",
 				"UMG",
-				"TapCommon"
+				"TapCommon",
+				"XDGCommon"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
@@ -78,6 +79,15 @@ public class XDGPayment : ModuleRules
                 "AndroidPlugin",
                 Path.Combine(ModuleDirectory, "XDGPayment_Android_UPL.xml")
             );
+        }	
+
+		if (Target.Platform == UnrealTargetPlatform.IOS) {
+            PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"XDGPaymentSDK",
+						"../ThirdParty/XDGPaymentSDK.embeddedframework.zip"
+                    )
+                );
         }		
 
 	}

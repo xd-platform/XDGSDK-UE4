@@ -230,12 +230,26 @@ extern "C"
 {
 #endif
 
-    __attribute__((visibility("default"))) void Java_com_xd_XDGPaymentUnreal4_nativeOnXDGSDKPaymentSucceed(JNIEnv *jenv, jclass thiz, jstring resultJson)
+    __attribute__((visibility("default"))) void Java_com_xd_XDGPaymentUnreal4_nativeOnXDGSDKPaymentSucceed(JNIEnv *jenv, jclass thiz, jstring orderId, jstring productId, jstring serverId, jstring roleId)
     {
-        const char *cJson = jenv->GetStringUTFChars(resultJson, 0);
-        FString fJson = UTF8_TO_TCHAR(cJson);
-        FXDGPaymentModule::OnXDGSDKPaymentSucceed.Broadcast(fJson);
-        jenv->ReleaseStringUTFChars(resultJson, cJson);
+        const char *cOrderId = jenv->GetStringUTFChars(orderId, 0);
+        FString fOrderId = UTF8_TO_TCHAR(cOrderId);
+
+        const char *cProductId = jenv->GetStringUTFChars(productId, 0);
+        FString fProductId = UTF8_TO_TCHAR(cProductId);
+
+        const char *cServerId = jenv->GetStringUTFChars(serverId, 0);
+        FString fServerId = UTF8_TO_TCHAR(cServerId);
+
+        const char *cRoleId = jenv->GetStringUTFChars(roleId, 0);
+        FString fRoleId = UTF8_TO_TCHAR(cRoleId);
+
+        FXDGPaymentModule::OnXDGSDKPaymentSucceed.Broadcast(fOrderId, fProductId, fServerId, fRoleId);
+
+        jenv->ReleaseStringUTFChars(orderId, cOrderId);
+        jenv->ReleaseStringUTFChars(productId, cProductId);
+        jenv->ReleaseStringUTFChars(serverId, cServerId);
+        jenv->ReleaseStringUTFChars(roleId, cRoleId);
     }
 
       __attribute__((visibility("default"))) void Java_com_xd_XDGPaymentUnreal4_nativeOnXDGSDKPaymentFailed(JNIEnv *jenv, jclass thiz, int32 code ,jstring msg)
@@ -278,12 +292,22 @@ extern "C"
         jenv->ReleaseStringUTFChars(msg, cMsg);
     }
 
-      __attribute__((visibility("default"))) void Java_com_xd_XDGPaymentUnreal4_nativeOnXDGSDKPayWithWebComplete(JNIEnv *jenv, jclass thiz, jstring resultJson)
+      __attribute__((visibility("default"))) void Java_com_xd_XDGPaymentUnreal4_nativeOnXDGSDKPayWithWebCompleted(JNIEnv *jenv, jclass thiz, jstring serverId, jstring roleId, int32 code, jstring errorMsg)
     {
-        const char *cJson = jenv->GetStringUTFChars(resultJson, 0);
-        FString fJson = UTF8_TO_TCHAR(cJson);
-        FXDGPaymentModule::OnXDGSDKPayWithWebComplete.Broadcast(fJson);
-        jenv->ReleaseStringUTFChars(resultJson, cJson);
+        const char *cServerId = jenv->GetStringUTFChars(serverId, 0);
+        FString fServerId = UTF8_TO_TCHAR(cServerId);
+
+        const char *cRoleId = jenv->GetStringUTFChars(roleId, 0);
+        FString fRoleId = UTF8_TO_TCHAR(cRoleId);
+
+        const char *cErrorMsg = jenv->GetStringUTFChars(errorMsg, 0);
+        FString fErrorMsg = UTF8_TO_TCHAR(cErrorMsg);
+
+        FXDGPaymentModule::OnXDGSDKPayWithWebCompleted.Broadcast(fServerId, fRoleId, (int)code, fErrorMsg);
+
+        jenv->ReleaseStringUTFChars(serverId, cServerId);
+        jenv->ReleaseStringUTFChars(roleId, cRoleId);
+        jenv->ReleaseStringUTFChars(errorMsg, cErrorMsg);
     }
 
       __attribute__((visibility("default"))) void Java_com_xd_XDGPaymentUnreal4_nativeOnXDGSDKCheckRefundStatusSucceed(JNIEnv *jenv, jclass thiz, jstring resultJson)

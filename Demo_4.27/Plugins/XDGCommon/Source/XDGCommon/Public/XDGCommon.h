@@ -23,14 +23,14 @@ public:
       }
 
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKInitSucceed, const bool);
-	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKShareSucceed, const int32);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKShareCompleted, const int32);
    
 
     UPROPERTY(BlueprintAssignable, Category = "XDGCommon")
     static FXDGSDKInitSucceed OnXDGSDKInitSucceed;
 
 	UPROPERTY(BlueprintAssignable, Category = "XDGCommon")
-    static FXDGSDKShareSucceed OnXDGSDKShareSucceed;
+    static FXDGSDKShareCompleted OnXDGSDKShareCompleted;
 	
 
 };

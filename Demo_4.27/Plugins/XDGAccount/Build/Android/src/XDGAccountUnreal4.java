@@ -53,7 +53,6 @@ public class XDGAccountUnreal4{
             tdsUserParams.put("boundAccounts", boundAccounts);
             Map<String, Object> tokenParams = new HashMap<>(5);
             tokenParams.put("kid", xdgUser.getAccessToken().getKid());
-            tokenParams.put("accessToken", xdgUser.getAccessToken().getKid());
             tokenParams.put("tokenType", xdgUser.getAccessToken().getTokenType());
             tokenParams.put("macKey", xdgUser.getAccessToken().getMacKey());
             tokenParams.put("macAlgorithm", xdgUser.getAccessToken().getMacAlgorithm());
@@ -66,6 +65,8 @@ public class XDGAccountUnreal4{
                 nativeOnXDGSDKGetUserSucceed(userJson);
             }
 
+            print("成功：" + userJson);
+
         }else if (tdsServerError != null) {
             int code  = tdsServerError.getCode();
             String msg = tdsServerError.getMessage();
@@ -75,6 +76,8 @@ public class XDGAccountUnreal4{
             }else{//获取用户失败
                 nativeOnXDGSDKGetUserFailed(code, msg);
             }
+
+            print("失败：code = " + code + "  msg = " + msg);
         }
     }
 	
@@ -103,6 +106,7 @@ public class XDGAccountUnreal4{
             @Override
             public void userStatusChange(int code, String message) {
                  nativeOnXDGSDKUserStateChanged(code, message);
+                 print("changed status, code = " + code + "  msg = " + message);
             }
         });
     }
@@ -136,6 +140,7 @@ public class XDGAccountUnreal4{
                sessionToken = tapSessionToken.sessionToken;
             }
             nativeOnXDGSDKLoginSync(sessionToken);
+            print("token为: " + sessionToken);
         };
         TDSGlobalAccountComponent.INSTANCE.connectTDSServer()
                 .subscribeOn(Schedulers.io())

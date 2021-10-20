@@ -32,7 +32,7 @@ public class XDGPaymentUnreal4 {
         XDGPayment.payWithChannel(orderId, productId, roleId, serverId, ext, new XDGPaymentCallback<Object>() {
             @Override
             public void onPaymentCallback(XDGPaymentResult result, Object data) {
-                handlerOrderInfoToBridge(orderId, productId, roleId, serverId, ext, result.code, result.debugMessage);
+                handlerOrderInfoToBridge(orderId, productId, roleId, serverId, result.code, result.debugMessage);
             }
         });
     }
@@ -42,7 +42,7 @@ public class XDGPaymentUnreal4 {
         XDGPayment.payWithProduct(orderId, productId, roleId, serverId, ext, new XDGPaymentCallback<Object>() {
             @Override
             public void onPaymentCallback(XDGPaymentResult result, Object data) {
-                handlerOrderInfoToBridge(orderId, productId, roleId, serverId, ext, result.code, result.debugMessage);
+                handlerOrderInfoToBridge(orderId, productId, roleId, serverId, result.code, result.debugMessage);
             }
         });
     }
@@ -90,6 +90,7 @@ public class XDGPaymentUnreal4 {
                 if (result.code == Constants.PaymentResponseCode.OK) {
                     String json = BridgeJsonHelper.object2JsonString(resultParams);
                     nativeOnXDGSDKQueryRestoredPurchasesSucceed(json);
+                    print("结果：" + json);
                 } else {
                     nativeOnXDGSDKQueryRestoredPurchasesFailed(result.code, result.debugMessage);
                 }
@@ -110,7 +111,8 @@ public class XDGPaymentUnreal4 {
         XDGPayment.restorePurchase(info, orderId, productId, roleId, serverId, ext, new XDGPaymentCallback<Object>() {
             @Override
             public void onPaymentCallback(XDGPaymentResult result, Object data) {
-                handlerOrderInfoToBridge(orderId, productId, roleId, serverId, ext, result.code, result.debugMessage);
+                handlerOrderInfoToBridge(orderId, productId, roleId, serverId, result.code, result.debugMessage);
+                
             }
         });
     }
@@ -120,8 +122,8 @@ public class XDGPaymentUnreal4 {
         XDGPayment.payWithWeb(serverId, roleId, new XDGPaymentCallback<Object>() {
             @Override
             public void onPaymentCallback(XDGPaymentResult result, Object data) {
-                String json = BridgeJsonHelper.object2JsonString(result);
-                nativeOnXDGSDKPayWithWebComplete(json);
+                nativeOnXDGSDKPayWithWebCompleted(serverId, roleId, result.code, result.debugMessage);
+                print("结果：code = " + result.code, + "  message: " + result.debugMessage);
             }
         });
     }
@@ -144,17 +146,10 @@ public class XDGPaymentUnreal4 {
         });
     }
 
-    private static void handlerOrderInfoToBridge(String orderId, String productId, String roleId, String serverId, String ext, int code, String message) {
+    private static void handlerOrderInfoToBridge(String orderId, String productId, String roleId, String serverId, int code, String message) {
+        print("结果：code = " + code + "   message = " + message);
         if (code == Constants.PaymentResponseCode.OK) {
-            Map<String, String> orderInfoParam = new HashMap<>();
-            orderInfoParam.put("orderId", orderId);
-            orderInfoParam.put("productId", productId);
-            orderInfoParam.put("roleId", roleId);
-            orderInfoParam.put("serverId", serverId);
-            orderInfoParam.put("ext", ext);
-
-            String json = BridgeJsonHelper.object2JsonString(orderInfoParam);
-            nativeOnXDGSDKPaymentSucceed(json);
+            nativeOnXDGSDKPaymentSucceed(orderId, productId, serverId, roleId);
 
         } else {
             nativeOnXDGSDKPaymentFailed(code, message);
@@ -174,10 +169,12 @@ public class XDGPaymentUnreal4 {
 
                 String json = BridgeJsonHelper.object2JsonString(successParam);
                 nativeOnXDGSDKCheckRefundStatusSucceed(json);
+                print("成功： " + json);
             }
 
         } else {
             nativeOnXDGSDKCheckRefundStatusFailed(result.code, result.debugMessage);
+            print("失败了 code = " + result.code + "  message = " + result.debugMessage);
         }
     }
 
@@ -186,7 +183,7 @@ public class XDGPaymentUnreal4 {
     }
 
     //------JNI 回调-------
-    public native static void nativeOnXDGSDKPaymentSucceed(String resultJson);
+    public native static void nativeOnXDGSDKPaymentSucceed(String orderId, String productId, String serverId, String roleId);
 
     public native static void nativeOnXDGSDKPaymentFailed(int code, String msg);
 
@@ -198,7 +195,7 @@ public class XDGPaymentUnreal4 {
 
     public native static void nativeOnXDGSDKQueryRestoredPurchasesFailed(int code, String msg);
 
-    public native static void nativeOnXDGSDKPayWithWebComplete(String resultJson);
+    public native static void nativeOnXDGSDKPayWithWebCompleted(String serverId, String roleId, int code, String errorMsg);
 
     public native static void nativeOnXDGSDKCheckRefundStatusSucceed(String resultJson);
 
