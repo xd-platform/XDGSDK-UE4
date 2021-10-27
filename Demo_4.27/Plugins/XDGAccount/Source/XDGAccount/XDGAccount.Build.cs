@@ -55,7 +55,8 @@ public class XDGAccount : ModuleRules
 				"Slate",
 				"SlateCore",
 				"UMG",
-				"XDGCommon"
+				"XDGCommon",
+				"TapCommon"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

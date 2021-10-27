@@ -244,9 +244,9 @@ public class XDGCommon : ModuleRules
 				);
 
 				PublicSystemLibraryPaths.Add("/usr/lib/swift");
-				PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility51.a"));
-                PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility50.a"));
-                PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibilityDynamicReplacements.a")); 
+				// PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility51.a"));
+                // PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility50.a"));
+                // PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibilityDynamicReplacements.a")); 
 
 				//bundle
 				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/GoogleSignIn.bundle")));

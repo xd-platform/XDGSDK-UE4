@@ -5,6 +5,7 @@
 #import "IOSAppDelegate+XDGCommon.h"
 #import <objc/runtime.h>
 #import <XDGCommonSDK/XDGSDK.h>
+#import <XDGCommonSDK/XDGSDKSettings.h>
 
 @implementation IOSAppDelegate (XDGCommon)
 
@@ -28,6 +29,9 @@
         ((void (*)(id, SEL, id, id))imp)(self, sel, application, launchOptions);
     }
     //为了在类别方法里执行原来的方法--end
+
+    //Debug 模式会输出日志，以及开启第三方 SDK 的 debug 模式
+    [XDGSDKSettings setDebugMode:YES];
 
     [XDGSDK application:application didFinishLaunchingWithOptions:launchOptions];
     return YES;

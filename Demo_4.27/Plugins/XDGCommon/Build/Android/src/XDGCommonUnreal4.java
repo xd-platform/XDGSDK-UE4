@@ -51,8 +51,9 @@ public class XDGCommonUnreal4{
 
 
     public static boolean isInitialized(){
-        print("点击是否初始化");
-        return XDGSDK.isInitialized();
+        boolean isInit = XDGSDK.isInitialized();
+        print("点击是否初始化: " + isInit);
+        return isInit;
     }
 
 
@@ -63,7 +64,7 @@ public class XDGCommonUnreal4{
 
 
     public static void report(String serverId, String roleId, String roleName){
-        print("点击report");
+        print("点击 report:" + serverId + " roleId:" + roleId + " roleName:" + roleName);
         XDGSDK.report(serverId, roleId, roleName);
     }
 
@@ -78,13 +79,13 @@ public class XDGCommonUnreal4{
                                     String roleId,
                                     String roleName,
                                     int level){
-            print("点击trackRole");
+            print("点击 trackUser:" + serverId + " roleId:" + roleId + " roleName:" + roleName + " level:" + level);
             XDGSDK.trackRole(serverId, roleId, roleName, level);
         }
 
 
     public static void trackEvent(String eventName){
-        print("点击trackEvent");
+        print("点击trackEvent" + eventName);
         XDGSDK.trackEvent(eventName);
     }
 
@@ -95,15 +96,16 @@ public class XDGCommonUnreal4{
     }
 
     public static String getSDKVersionName(){
-        print("点击 getSDKVersionName");
-        return XDGSDK.getVersionName();
+        String v = XDGSDK.getVersionName();
+        print("点击 getSDKVersionName: " + v);
+        return v;
     }
 
 
     public static void shareFlavors(int shareFlavors,
                             String uri,
                             String message){
-        print("点击 share 3个参数");
+        print("点击 share:" + shareFlavors + " uri:" + uri + " message:" + message);
         XDGSDK.share(shareFlavors, uri, message, new XDGShareCallback() {
             @Override
             public void shareSuccess() {
@@ -125,8 +127,7 @@ public class XDGCommonUnreal4{
 
     public static void shareImage(int shareFlavors,
                                 String imagePath){
-                    print("点击 share 2个参数");
-                    
+                    print("点击 share 2个参数 shareFlavors：" + shareFlavors + "  imagePath: " + imagePath);
                     TdsPermission.with(Bridge.getInstance().getActivity())
                     .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                     .request(new RequestPermissionCallback() {
@@ -175,26 +176,27 @@ public class XDGCommonUnreal4{
 
 
     public static void setCurrentUserPushServiceEnable(boolean enable){
-        print("点击 setCurrentUserPushServiceEnable");
+        print("点击 setCurrentUserPushServiceEnable " + enable);
         XDGSDK.setCurrentUserPushServiceEnable(enable);
     }
 
 
     public static boolean isCurrentUserPushServiceEnable(){
-        print("点击 isCurrentUserPushServiceEnable");
-        return XDGSDK.isCurrentUserPushServiceEnable();
+        boolean r = XDGSDK.isCurrentUserPushServiceEnable();
+        print("点击 isCurrentUserPushServiceEnable" + r);
+        return r;
     }
 
 
     public static void eventCompletedTutorial(){
         print("点击 eventCompletedTutorial");
-
+        XDGSDK.eventCompletedTutorial();
     }
 
 
     public static void eventCreateRole(){
          print("点击 eventCreateRole");
-        
+         XDGSDK.eventCreateRole();
     }
 
     // 下面是与SDK无关方法

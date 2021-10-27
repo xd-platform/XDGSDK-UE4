@@ -123,7 +123,7 @@ public class XDGPaymentUnreal4 {
             @Override
             public void onPaymentCallback(XDGPaymentResult result, Object data) {
                 nativeOnXDGSDKPayWithWebCompleted(serverId, roleId, result.code, result.debugMessage);
-                print("结果：code = " + result.code, + "  message: " + result.debugMessage);
+                print("结果：code = " + result.code + "  message: " + result.debugMessage);
             }
         });
     }

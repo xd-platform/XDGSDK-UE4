@@ -5,6 +5,10 @@
 #include "XDGAccountBridge.h"
 #include "Engine.h"
 
+#include "TapCommon.h"
+#include "TapJson.h"
+#include "TapBridge.h"
+
 
 UXDGAccountBPLibrary::UXDGAccountBPLibrary(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -32,6 +36,11 @@ void UXDGAccountBPLibrary::OpenUserCenter(){
 
 void UXDGAccountBPLibrary::Logout(){
     GetXDGAccountBridge()->Logout();
+    
+#if PLATFORM_ANDROID || PLATFORM_IOS
+    FString commandJson = TapJson::ConstructorCommand(TEXT("TapBootstrapService"),TEXT("logout"),TEXT(""),false,TEXT(""),false);
+    GetBridge()->CallHandler(commandJson);
+#endif
 }
 
 void UXDGAccountBPLibrary::LoginSync(){

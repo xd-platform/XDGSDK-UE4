@@ -84,11 +84,20 @@ bool XDGCommonIOS::IsInitialized(){
     bool isLoggedIn = false;
     isLoggedIn = [XDGGameDataManager isGameInited];
     NSLog(@"是否初始化了 %d", isLoggedIn);
+
+    [XDGSDK trackRoleWithRoleId:@"roleId" roleName:@"roleName" serverId:@"serverId" level:0];
+    [XDGSDK trackEvent:@"eventName" properties:@{@"test":@"test"}];
+    [XDGSDK trackAchievement];
+    [XDGSDK eventCreateRole];
+    [XDGSDK eventCompletedTutorial];
+    NSLog(@"点击 Test");
+
     return isLoggedIn;
 }
 
 void XDGCommonIOS::Report(FString serverId, FString roleId, FString roleName){
     [XDGSDK reportWithServerId:serverId.GetNSString() roleId:roleId.GetNSString() roleName:roleName.GetNSString()];
+    NSLog(@"点击了 Report %@", serverId.GetNSString());
 }
 
 void XDGCommonIOS::StoreReview(){
@@ -97,36 +106,50 @@ void XDGCommonIOS::StoreReview(){
 }
 
 void XDGCommonIOS::ShareFlavors(int32 type, FString uri, FString message){
-     XDGShareType shareType = XDGShareTypeFacebook;//0
-     if(type == 1){
-        shareType = XDGShareTypeFacebook;
-     }else if(type == 2){
-        shareType = XDGShareTypeFacebook;
-     }
+    NSLog(@"点击 ShareFlavors %@", uri.GetNSString());
 
-     [XDGShare shareWithType:shareType url:uri.GetNSString() message:message.GetNSString() completeHandler:^(NSError * _Nullable error, BOOL cancel) {
-       [XDGUE4CommonTool shareWithResult:error cancel:cancel];
-    }];   
+    dispatch_async(dispatch_get_main_queue(), ^{
+        XDGShareType shareType = XDGShareTypeFacebook;//0
+        if(type == 1){
+            shareType = XDGShareTypeFacebook;
+        }else if(type == 2){
+            shareType = XDGShareTypeFacebook;
+        }
+
+        [XDGShare shareWithType:shareType url:uri.GetNSString() message:message.GetNSString() completeHandler:^(NSError * _Nullable error, BOOL cancel) {
+            [XDGUE4CommonTool shareWithResult:error cancel:cancel];
+        }];   
+    });
 }
 
 void XDGCommonIOS::ShareImage(int32 type, FString imagePath){
-    XDGShareType shareType = XDGShareTypeFacebook;//0
-     if(type == 1){
-        shareType = XDGShareTypeFacebook;
-     }else if(type == 2){
-        shareType = XDGShareTypeFacebook;
-     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        XDGShareType shareType = XDGShareTypeFacebook;//0
+        if(type == 1){
+            shareType = XDGShareTypeFacebook;
+        }else if(type == 2){
+            shareType = XDGShareTypeFacebook;
+        }
 
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath.GetNSString()];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    if (!image) {
-        NSError *error = [NSError errorWithDomain:@"com.tdsglobal.share" code:-1 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat: @"can not find image with path:%@",imagePath.GetNSString()]}];
-        [XDGUE4CommonTool shareWithResult:error cancel:NO];
-        return;
-    }
-    [XDGShare shareWithType:shareType image:image completeHandler:^(NSError * _Nullable error, BOOL cancel) {
-         [XDGUE4CommonTool shareWithResult:error cancel:cancel];
-    }];
+        //正式代码
+        // NSData *imageData = [NSData dataWithContentsOfFile:imagePath.GetNSString()];
+        // UIImage *image = [[UIImage alloc] initWithData:imageData];
+
+        //测试代码
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"share" ofType:@"jpg"];
+        UIImage* image = [UIImage imageWithContentsOfFile:filePath];
+        NSLog(@"点击 ShareFlavors %@", filePath);
+
+        if (!image) {
+            NSError *error = [NSError errorWithDomain:@"com.tdsglobal.share" code:-1 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat: @"can not find image with path:%@",imagePath.GetNSString()]}];
+            [XDGUE4CommonTool shareWithResult:error cancel:NO];
+            NSLog(@"分享图片失败");
+            return;
+        }
+        [XDGShare shareWithType:shareType image:image completeHandler:^(NSError * _Nullable error, BOOL cancel) {
+            [XDGUE4CommonTool shareWithResult:error cancel:cancel];
+        }];
+    });
 }
 
 void XDGCommonIOS::TrackUser(FString userId){
@@ -162,7 +185,7 @@ void XDGCommonIOS::EventCreateRole(){
 void XDGCommonIOS::SetCurrentUserPushServiceEnable(bool enable){
     dispatch_async(dispatch_get_main_queue(), ^{
         [XDGMessageManager setCurrentUserPushServiceEnable:enable];
-         NSLog(@"点击 PushServiceEnable");
+         NSLog(@"点击 PushServiceEnable %d", enable);
     });
 }
 

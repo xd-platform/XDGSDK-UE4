@@ -58,7 +58,7 @@ void XDGPaymentIOS::PayWithProduct(FString orderId,
                             FString serverId,
                             FString ext){
     dispatch_async(dispatch_get_main_queue(), ^{                            
-        [XDGPayment payWithOrderId:orderId.GetNSString() productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
+        [XDGPayment payWithOrderId:[XDGUE4PaymentTool randomStr] productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
             [XDGUE4PaymentTool bridgePayCallback:orderInfo error:error];
         }];   
      });                            
@@ -209,6 +209,13 @@ void XDGPaymentIOS::PurchaseToken(FString transactionIdentifier,
         FXDGPaymentModule::OnXDGSDKCheckRefundStatusSucceed.Broadcast(UTF8_TO_TCHAR([strJson UTF8String]));
         NSLog(@"成功了 %@", strJson);
     }
+}
+
++ (NSString *)randomStr{
+    char datas[32];
+    char _randomStr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (int x=0;x<32;datas[x++] =_randomStr[arc4random()%62]); //71
+    return [[NSString alloc] initWithBytes:datas length:32 encoding:NSUTF8StringEncoding];
 }
 
 @end

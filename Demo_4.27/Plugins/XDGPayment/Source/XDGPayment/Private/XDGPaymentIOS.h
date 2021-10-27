@@ -72,6 +72,8 @@ public:
 
 + (void)bridgeRefundStatusWithCode:(XDGRepayMentCode)code msg:(NSString *)msg data:(NSDictionary *)data;
 
++ (NSString *)randomStr;
+
 @end
 
 
