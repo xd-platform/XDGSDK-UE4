@@ -43,5 +43,7 @@ public:
 
 	void SetCurrentUserPushServiceEnable(bool enable);
 	bool IsCurrentUserPushServiceEnable();
+
+	void GetRegionInfo();
 };
 #endif 

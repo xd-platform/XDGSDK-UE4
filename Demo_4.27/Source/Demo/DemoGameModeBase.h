@@ -21,6 +21,8 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
     //0成功，1取消，2失败
     void OnXDGSDKShareCompleted(const int32);
 
+    void OnXDGSDKGetRegionInfoCompleted(const FString&, const FString&, const FString&, const FString&);
+
     //XDGAccount 
 	void OnXDGSDKLoginSucceed(const FString&);
 

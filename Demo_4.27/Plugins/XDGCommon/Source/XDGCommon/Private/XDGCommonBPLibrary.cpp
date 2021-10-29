@@ -76,3 +76,7 @@ bool UXDGCommonBPLibrary::IsCurrentUserPushServiceEnable(){
    return GetXDGCommonBridge()->IsCurrentUserPushServiceEnable();
 }
 
+void UXDGCommonBPLibrary::GetRegionInfo(){
+    GetXDGCommonBridge()->GetRegionInfo();
+}
+

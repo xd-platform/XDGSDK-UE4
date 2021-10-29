@@ -331,6 +331,10 @@ bool XDGCommonAndroid::IsCurrentUserPushServiceEnable(){
 }
 
 
+void XDGCommonAndroid::GetRegionInfo(){
+
+}
+
 #ifdef __cplusplus
 extern "C"
 {

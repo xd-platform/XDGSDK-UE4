@@ -6,6 +6,7 @@
 
 FXDGCommonModule::FXDGSDKInitSucceed FXDGCommonModule::OnXDGSDKInitSucceed;
 FXDGCommonModule::FXDGSDKShareCompleted FXDGCommonModule::OnXDGSDKShareCompleted;
+FXDGCommonModule::FXDGSDKGetRegionInfoCompleted FXDGCommonModule::OnXDGSDKGetRegionInfoCompleted;
 
 IMPLEMENT_MODULE(FXDGCommonModule, XDGCommon)
 

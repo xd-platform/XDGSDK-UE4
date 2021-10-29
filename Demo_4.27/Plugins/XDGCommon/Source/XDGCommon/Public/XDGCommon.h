@@ -24,6 +24,7 @@ public:
 
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKInitSucceed, const bool);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKShareCompleted, const int32);
+    DECLARE_MULTICAST_DELEGATE_FourParams(FXDGSDKGetRegionInfoCompleted, const FString&, const FString&, const FString&, const FString&);
    
 
     UPROPERTY(BlueprintAssignable, Category = "XDGCommon")
@@ -31,6 +32,8 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "XDGCommon")
     static FXDGSDKShareCompleted OnXDGSDKShareCompleted;
-	
 
+    UPROPERTY(BlueprintAssignable, Category = "XDGCommon")
+    static FXDGSDKGetRegionInfoCompleted OnXDGSDKGetRegionInfoCompleted;
+	
 };

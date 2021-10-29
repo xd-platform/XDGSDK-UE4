@@ -10,6 +10,7 @@ void ADemoGameModeBase::BeginPlay(){
     //XDGCommon
     FXDGCommonModule::OnXDGSDKInitSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKInitSucceed);
     FXDGCommonModule::OnXDGSDKShareCompleted.AddUObject(this, &ADemoGameModeBase::OnXDGSDKShareCompleted);
+    FXDGCommonModule::OnXDGSDKGetRegionInfoCompleted.AddUObject(this, &ADemoGameModeBase::OnXDGSDKGetRegionInfoCompleted);
 
     //XDGAccount
     FXDGAccountModule::OnXDGSDKLoginSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKLoginSucceed);
@@ -43,6 +44,11 @@ void ADemoGameModeBase::OnXDGSDKInitSucceed(const bool success){
 void ADemoGameModeBase::OnXDGSDKShareCompleted(const int32 code){
     UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKShareCompleted"));
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKShareCompleted: " + FString::FromInt(code));
+}
+
+void ADemoGameModeBase::OnXDGSDKGetRegionInfoCompleted(const FString& countryCode, const FString& city, const FString& timeZone, const FString& locationInfoType){
+    UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKGetRegionInfoCompleted"));
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKGetRegionInfoCompleted: " + countryCode + city + timeZone + locationInfoType);
 }
 
 

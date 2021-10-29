@@ -197,6 +197,21 @@ bool XDGCommonIOS::IsCurrentUserPushServiceEnable(){
 }
 
 
+void XDGCommonIOS::GetRegionInfo(){
+     dispatch_async(dispatch_get_main_queue(), ^{
+        [XDGSDK getRegionInfo:^(XDGRegionInfo * _Nonnull info) {
+            NSString* countryCode = info.countryCode;
+            NSString* city = info.city;
+            NSString* timeZone = info.timeZone;
+            NSString* locationInfoType = info.locationInfoType;
+        
+            NSLog(@"点击 GetRegionInfo %@  -  %@  - %@ - %@", countryCode, city, timeZone, locationInfoType);
+            FXDGCommonModule::OnXDGSDKGetRegionInfoCompleted.Broadcast(UTF8_TO_TCHAR([countryCode?:@"" UTF8String]), UTF8_TO_TCHAR([city?:@"" UTF8String]), UTF8_TO_TCHAR([timeZone?:@"" UTF8String]), UTF8_TO_TCHAR([locationInfoType?:@"" UTF8String]));
+        }];
+    });
+}
+
+
 //-------ios 源代码-------
 @implementation XDGUE4CommonTool
 

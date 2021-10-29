@@ -42,6 +42,8 @@ public:
 
 	void SetCurrentUserPushServiceEnable(bool enable);
 	bool IsCurrentUserPushServiceEnable();
+
+	void GetRegionInfo();
 };
 
 @interface XDGUE4CommonTool : NSObject

@@ -29,6 +29,9 @@ public:
 
 	virtual void SetCurrentUserPushServiceEnable(bool enable) = 0;
 	virtual bool IsCurrentUserPushServiceEnable() = 0;
+
+	virtual void GetRegionInfo() = 0;
+	
 };
 
 XDGCommonBridge *GetXDGCommonBridge();
