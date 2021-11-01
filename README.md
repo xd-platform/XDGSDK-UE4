@@ -221,7 +221,14 @@ void ADemoGameModeBase::OnXDGSDKShareCompleted(const int32 code){
 UFUNCTION(BlueprintCallable, Category = "XDGAccount")
 static void Login();
 
-//单独调用第三方登录
+//单独调用第三方登录，可传如下字符串参数
+// "TAPTAP"
+// "GOOGLE"
+// "FACEBOOK"
+// "APPLE"
+// "LINE"
+// "TWITTER"
+// "GUEST"
 UFUNCTION(BlueprintCallable, Category = "XDGAccount")
 static void LoginByType(FString loginType);
 
