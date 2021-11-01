@@ -26,6 +26,7 @@ import com.xd.intl.common.component.share.XDGShareCallback;
 import com.xd.intl.common.XDGSDK;
 import com.xd.intl.common.callback.XDGInitCallback;
 import com.xd.intl.common.global.GlobalLocalConfig;
+import com.xd.intl.common.bean.XDGRegionInfo;
 
 import java.io.File;
 import java.util.HashMap;
@@ -199,6 +200,12 @@ public class XDGCommonUnreal4{
          XDGSDK.eventCreateRole();
     }
 
+
+    public static void getRegionInfo() {
+        XDGRegionInfo info = XDGSDK.getRegionInfo();
+        nativeOnXDGSDKGetRegionInfoCompleted(info.countryCode, info.city, info.timeZone, info.locationInfoType);
+    }
+
     // 下面是与SDK无关方法
     public static void onCreate(final Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
@@ -233,5 +240,7 @@ public class XDGCommonUnreal4{
 
     //0成功，1取消，2失败
     public native static void nativeOnXDGSDKShareCompleted(int code);
+
+    public native static void nativeOnXDGSDKGetRegionInfoCompleted(String countryCode,  String city,  String timeZone,  String locationInfoType);
 
 }

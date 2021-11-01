@@ -332,7 +332,19 @@ bool XDGCommonAndroid::IsCurrentUserPushServiceEnable(){
 
 
 void XDGCommonAndroid::GetRegionInfo(){
-
+ JNIEnv *env = FAndroidApplication::GetJavaEnv();
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
+    if (jXDSDKUnreal4Class)
+    {
+        const char *strMethod = "getRegionInfo";
+        auto jMethod = env->GetStaticMethodID(jXDSDKUnreal4Class, strMethod,
+                                              "()V");
+        if (jMethod)
+        {
+            env->CallStaticVoidMethod(jXDSDKUnreal4Class, jMethod);
+        }
+    }
+    env->DeleteLocalRef(jXDSDKUnreal4Class);   
 }
 
 #ifdef __cplusplus
@@ -348,6 +360,28 @@ extern "C"
   __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKShareCompleted(JNIEnv *jenv, jclass thiz, int32 code)
     {
         FXDGCommonModule::OnXDGSDKShareCompleted.Broadcast((int)code);
+    }
+
+  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKGetRegionInfoCompleted(JNIEnv *jenv, jclass thiz, jstring countryCode, jstring city, jstring timeZone, jstring locationInfoType)
+    {
+        const char *cCountryCode = jenv->GetStringUTFChars(countryCode, 0);
+        FString fCountryCode = UTF8_TO_TCHAR(cCountryCode);
+
+        const char *cCity = jenv->GetStringUTFChars(city, 0);
+        FString fCity = UTF8_TO_TCHAR(cCity);
+
+        const char *cTimeZone = jenv->GetStringUTFChars(timeZone, 0);
+        FString fTimeZone = UTF8_TO_TCHAR(cTimeZone);
+
+        const char *cLocationInfoType = jenv->GetStringUTFChars(locationInfoType, 0);
+        FString fLocationInfoType = UTF8_TO_TCHAR(cLocationInfoType);
+
+        FXDGCommonModule::OnXDGSDKGetRegionInfoCompleted.Broadcast(fCountryCode, fCity, fTimeZone, fLocationInfoType);
+
+        jenv->ReleaseStringUTFChars(countryCode, cCountryCode);
+        jenv->ReleaseStringUTFChars(city, cCity);
+        jenv->ReleaseStringUTFChars(timeZone, cTimeZone);
+        jenv->ReleaseStringUTFChars(locationInfoType, cLocationInfoType);
     }
 
 #ifdef __cplusplus
