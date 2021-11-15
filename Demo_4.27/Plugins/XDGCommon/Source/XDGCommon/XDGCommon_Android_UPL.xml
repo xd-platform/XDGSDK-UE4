@@ -31,11 +31,11 @@
         <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
         <addAttribute tag="application" name="android:usesCleartextTraffic" value="true"/>
 
-        <!-- 注意，要把下面的 337997064271037 配置成自己的facebook参数  -->
+        <!-- 注意，要把下面的 458469102360728 配置成自己的facebook参数  -->
         <addElements tag="application"> 
             <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
-                android:value="fb337997064271037" />
+                android:value="fb458469102360728" />
 
             <meta-data
                 android:name="firebase_performance_logcat_enabled"
@@ -53,13 +53,13 @@
                 <intent-filter><action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.DEFAULT" />
                     <category android:name="android.intent.category.BROWSABLE" />
-                    <data android:scheme="fb337997064271037" />
+                    <data android:scheme="fb458469102360728" />
                 </intent-filter>
             </activity>
 
             <provider
                 android:name="com.facebook.FacebookContentProvider"
-                android:authorities="com.facebook.app.FacebookContentProvider337997064271037"
+                android:authorities="com.facebook.app.FacebookContentProvider458469102360728"
                 android:exported="true" />
         </addElements>
     </androidManifestUpdates>

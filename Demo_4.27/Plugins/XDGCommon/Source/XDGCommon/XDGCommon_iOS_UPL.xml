@@ -42,7 +42,7 @@
             <string>facebook</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>fb337997064271037</string>
+              <string>fb458469102360728</string>
             </array>
           </dict>
           <dict>
@@ -73,16 +73,6 @@
             <key>CFBundleURLSchemes</key>
             <array>
               <string>com.googleusercontent.apps.888194877532-08sa8mvbgoqb54a605miomb9um2jqfab</string>
-            </array>
-          </dict>
-          <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLName</key>
-            <string>RO-FACEBOOK</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-              <string>fb1868878816534271</string>
             </array>
           </dict>
           <dict>
