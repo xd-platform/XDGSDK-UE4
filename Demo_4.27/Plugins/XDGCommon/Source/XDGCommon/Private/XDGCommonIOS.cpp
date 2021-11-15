@@ -84,14 +84,6 @@ bool XDGCommonIOS::IsInitialized(){
     bool isLoggedIn = false;
     isLoggedIn = [XDGGameDataManager isGameInited];
     NSLog(@"是否初始化了 %d", isLoggedIn);
-
-    [XDGSDK trackRoleWithRoleId:@"roleId" roleName:@"roleName" serverId:@"serverId" level:0];
-    [XDGSDK trackEvent:@"eventName" properties:@{@"test":@"test"}];
-    [XDGSDK trackAchievement];
-    [XDGSDK eventCreateRole];
-    [XDGSDK eventCompletedTutorial];
-    NSLog(@"点击 Test");
-
     return isLoggedIn;
 }
 
@@ -131,14 +123,8 @@ void XDGCommonIOS::ShareImage(int32 type, FString imagePath){
             shareType = XDGShareTypeFacebook;
         }
 
-        //正式代码
-        // NSData *imageData = [NSData dataWithContentsOfFile:imagePath.GetNSString()];
-        // UIImage *image = [[UIImage alloc] initWithData:imageData];
-
-        //测试代码
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"share" ofType:@"jpg"];
-        UIImage* image = [UIImage imageWithContentsOfFile:filePath];
-        NSLog(@"点击 ShareFlavors %@", filePath);
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath.GetNSString()];
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
 
         if (!image) {
             NSError *error = [NSError errorWithDomain:@"com.tdsglobal.share" code:-1 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat: @"can not find image with path:%@",imagePath.GetNSString()]}];

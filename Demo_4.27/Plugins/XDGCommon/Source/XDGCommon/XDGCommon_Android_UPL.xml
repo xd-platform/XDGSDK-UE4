@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- init section is always evaluated once per architecture -->
     <init>
         <log text="XDSDK Android Build init"/>
     </init>
 
-    <!-- optional additions to proguard -->
     <proguardAdditions>
         <insert>
             -dontwarn com.xd.**
@@ -18,14 +16,13 @@
         </insert>
     </proguardAdditions>
 
-    <!-- optional files or directories to copy to Intermediate/Android/APK -->
    <resourceCopies>
         <copyDir src="$S(PluginDir)/../../Source/XDGCommon/Android/libs/" dst="$S(BuildDir)/libs/" />
         <copyDir src="$S(PluginDir)/../../Source/XDGCommon/Android/assets/" dst="$S(BuildDir)/assets/" />
         <copyDir src="$S(PluginDir)/../../Build/Android/src/" dst="$S(BuildDir)/src/com/xd/" />
     </resourceCopies>
 
-    <!-- optional updates applied to AndroidManifest.xml -->
+
     <androidManifestUpdates>
         <setStringFromAttribute result="PackageName" tag="manifest" name="package"/>
         <addPermission android:name="android.permission.INTERNET"/>
@@ -38,7 +35,7 @@
         <addElements tag="application"> 
             <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
-                android:value="\337997064271037" />
+                android:value="fb337997064271037" />
 
             <meta-data
                 android:name="firebase_performance_logcat_enabled"

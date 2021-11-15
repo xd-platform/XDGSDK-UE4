@@ -14,6 +14,7 @@
   <iosPListUpdates>
     <addElements tag="dict" once="true">
 
+      <!-- 文案可以修改成自己想要的 -->
         <key>NSCameraUsageDescription</key>
         <string>想要使用相机</string>
         <key>NSMicrophoneUsageDescription</key>
@@ -21,6 +22,7 @@
         <key>NSPhotoLibraryUsageDescription</key>
         <string>想要访问相册</string>
       
+      <!-- 注意，要把下面的 CFBundleURLSchemes 对应的值，配置成自己的参数  -->
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
@@ -113,6 +115,7 @@
           </dict>
         </array>
         
+        <!-- 下面这些是固定值 -->
         <key>LSApplicationQueriesSchemes</key>
         <array>
           <string>tapsdk</string>

@@ -11,10 +11,15 @@
 #### 3.配置iOS数据
 把 `XDGCommon/Source/XDGCommon/iOS/iOSConfigs` 文件夹里的 `GoogleService-Info.plist` 和 `XDG-Info.plist` 配置成自己的文件。
 
+把 `XDGCommon/Source/XDGCommon/XDGCommon_iOS_UPL.xml` 里的 `CFBundleURLSchemes`值配置成自己的参数。
 
 #### 4.配置Android数据
 把 `XDGCommon/Source/XDGCommon/Android/assets` 文件夹里的  `XDG_info.json`  
 和 `XDGAccount/Source/XDGAccount/Android/googleJson` 文件夹里的 `google-services.json` 配置成自己的文件。
+
+把`XDGCommon/Source/XDGCommon/XDGCommon_Android_UPL.xml` 中 `addElements`里的参数配置成自己的。
+
+
 
 ## XDGCommon 使用
 

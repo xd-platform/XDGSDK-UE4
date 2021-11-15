@@ -58,7 +58,7 @@ void XDGPaymentIOS::PayWithProduct(FString orderId,
                             FString serverId,
                             FString ext){
     dispatch_async(dispatch_get_main_queue(), ^{                            
-        [XDGPayment payWithOrderId:[XDGUE4PaymentTool randomStr] productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
+        [XDGPayment payWithOrderId:orderId.GetNSString() productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
             [XDGUE4PaymentTool bridgePayCallback:orderInfo error:error];
         }];   
      });                            
