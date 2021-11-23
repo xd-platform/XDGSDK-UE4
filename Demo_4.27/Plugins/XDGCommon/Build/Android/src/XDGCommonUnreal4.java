@@ -1,7 +1,8 @@
 package com.xd;
 
 import com.xd.intl.common.XDGSDK;
-
+import android.net.Uri;
+import com.xd.intl.common.component.share.XDGShareType;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -9,6 +10,8 @@ import android.app.Activity;
 import android.view.Display;
 import android.view.View;
 import android.widget.Toast;
+import android.os.Handler;
+import android.os.Looper;
 
 import android.Manifest;
 import android.app.Activity;
@@ -32,6 +35,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 
 public class XDGCommonUnreal4{
@@ -107,68 +112,104 @@ public class XDGCommonUnreal4{
                             String uri,
                             String message){
         print("点击 share:" + shareFlavors + " uri:" + uri + " message:" + message);
-        XDGSDK.share(shareFlavors, uri, message, new XDGShareCallback() {
-            @Override
-            public void shareSuccess() {
-                nativeOnXDGSDKShareCompleted(0);
-            }
 
+        //要在主线程执行
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
-            public void shareCancel() {
-                nativeOnXDGSDKShareCompleted(1);
-            }
+            public void run() {
 
-            @Override
-            public void shareFailed(String error) {
-                nativeOnXDGSDKShareCompleted(2);
+                @XDGShareType.Type int type = XDGShareType.FACEBOOK;
+                if (shareFlavors == 1) {
+                    type = XDGShareType.LINE;
+                } else if (shareFlavors == 2) {
+                    type = XDGShareType.TWITTER;
+                }
+
+                XDGSDK.share(type, uri, message, new XDGShareCallback() {
+                    @Override
+                    public void shareSuccess() {
+                        nativeOnXDGSDKShareCompleted(0);
+                    }
+
+                    @Override
+                    public void shareCancel() {
+                        nativeOnXDGSDKShareCompleted(1);
+                    }
+
+                    @Override
+                    public void shareFailed(String error) {
+                        nativeOnXDGSDKShareCompleted(2);
+                    }
+                });
             }
-        });
+            });
     }
 
+     public static void shareImage(int shareFlavors,
+                                   String imagePath){ //安卓uri path string
+            print("点击 share 2个参数 shareFlavors：" + shareFlavors + "  imagePath: " + imagePath);
 
-    public static void shareImage(int shareFlavors,
-                                String imagePath){
-                    print("点击 share 2个参数 shareFlavors：" + shareFlavors + "  imagePath: " + imagePath);
-                    TdsPermission.with(Bridge.getInstance().getActivity())
-                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .request(new RequestPermissionCallback() {
-                        @Override
-                        public void onResult(boolean allGranted, List<String> grantList, List<String> denList) {
-                            if (allGranted) {
-                                TdsImage.get(Bridge.getInstance().getActivity()).load(new File(imagePath))
-                                        .into(new ImageTarget() {
-                                            @Override
-                                            public void onSuccess(Bitmap bitmap) {
-                                                XDGSDK.share(shareFlavors, bitmap, new XDGShareCallback() {
-                                                    @Override
-                                                    public void shareSuccess() {
-                                                        nativeOnXDGSDKShareCompleted(0);
-                                                    }
+        //要在主线程执行
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                  
+                    @XDGShareType.Type int type = XDGShareType.FACEBOOK;
+                    if(shareFlavors == 1){
+                        type = XDGShareType.LINE;
+                    }else if(shareFlavors == 2){
+                        type = XDGShareType.TWITTER;
+                    }
 
-                                                    @Override
-                                                    public void shareCancel() {
-                                                        nativeOnXDGSDKShareCompleted(1);
-                                                    }
+                    if(type == XDGShareType.FACEBOOK){
+                        try {
+                            File file=new File(imagePath);
+                            if (file.exists()){
+                                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                                XDGSDK.share(type, bitmap, new XDGShareCallback() {
+                                    @Override
+                                    public void shareSuccess() {
+                                        nativeOnXDGSDKShareCompleted(0);
+                                    }
 
-                                                    @Override
-                                                    public void shareFailed(String error) {
-                                                        nativeOnXDGSDKShareCompleted(2);
-                                                    }
-                                                });
-                                            }
+                                    @Override
+                                    public void shareCancel() {
+                                        nativeOnXDGSDKShareCompleted(1);
+                                    }
 
-                                            @Override
-                                            public void onFailure(Throwable throwable) {
-                                                        nativeOnXDGSDKShareCompleted(2);
-                                            }
-                                        });
-                            } else {
+                                    @Override
+                                    public void shareFailed(String error) {
+                                        nativeOnXDGSDKShareCompleted(2);
+                                    }
+                                });
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            nativeOnXDGSDKShareCompleted(2);
+                        }
+
+                    }else{
+                        Uri uri = Uri.parse(new File(imagePath).toString());
+                        XDGSDK.share(type, uri, new XDGShareCallback() {
+                            @Override
+                            public void shareSuccess() {
+                                nativeOnXDGSDKShareCompleted(0);
+                            }
+
+                            @Override
+                            public void shareCancel() {
+                            nativeOnXDGSDKShareCompleted(1);
+                            }
+
+                            @Override
+                            public void shareFailed(String error) {
                                 nativeOnXDGSDKShareCompleted(2);
                             }
+                        });
                         }
-                    });
+              }
+            });
         }
-
 
     public static void storeReview(){
         print("点击 storeReview");

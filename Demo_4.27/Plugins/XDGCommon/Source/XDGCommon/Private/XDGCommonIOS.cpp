@@ -103,9 +103,9 @@ void XDGCommonIOS::ShareFlavors(int32 type, FString uri, FString message){
     dispatch_async(dispatch_get_main_queue(), ^{
         XDGShareType shareType = XDGShareTypeFacebook;//0
         if(type == 1){
-            shareType = XDGShareTypeFacebook;
+            shareType = XDGShareTypeLine; //1
         }else if(type == 2){
-            shareType = XDGShareTypeFacebook;
+            shareType = XDGShareTypeTwitter; //2
         }
 
         [XDGShare shareWithType:shareType url:uri.GetNSString() message:message.GetNSString() completeHandler:^(NSError * _Nullable error, BOOL cancel) {
@@ -118,19 +118,25 @@ void XDGCommonIOS::ShareImage(int32 type, FString imagePath){
     dispatch_async(dispatch_get_main_queue(), ^{
         XDGShareType shareType = XDGShareTypeFacebook;//0
         if(type == 1){
-            shareType = XDGShareTypeFacebook;
+            shareType = XDGShareTypeLine; //1
         }else if(type == 2){
-            shareType = XDGShareTypeFacebook;
+            shareType = XDGShareTypeTwitter; //2
         }
 
-        NSData *imageData = [NSData dataWithContentsOfFile:imagePath.GetNSString()];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        UIImage *image = nil;
+        NSString* str = imagePath.GetNSString();
+        if ([str hasPrefix:@"http"]) { //网络图片
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:str]]; 
+            image = [[UIImage alloc] initWithData:imageData];
 
-        if (!image) {
+        }else{ //沙盒路径图片
+            image = [UIImage imageWithContentsOfFile:str];
+        }
+
+        if (!image || image == nil) {
             NSError *error = [NSError errorWithDomain:@"com.tdsglobal.share" code:-1 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat: @"can not find image with path:%@",imagePath.GetNSString()]}];
             [XDGUE4CommonTool shareWithResult:error cancel:NO];
-            NSLog(@"分享图片失败");
-            return;
+            NSLog(@"分享图片为空");
         }
         [XDGShare shareWithType:shareType image:image completeHandler:^(NSError * _Nullable error, BOOL cancel) {
             [XDGUE4CommonTool shareWithResult:error cancel:cancel];
