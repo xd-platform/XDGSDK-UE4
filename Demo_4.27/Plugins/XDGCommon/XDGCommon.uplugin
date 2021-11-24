@@ -25,6 +25,10 @@
 		{
 			"Name": "TapLogin",
 			"Enabled": true
+		},
+		{
+			"Name": "TapDB",
+			"Enabled": true
 		}
 	]
 }

@@ -37,7 +37,8 @@ public class XDGCommon : ModuleRules
 				"CoreUObject",
 				"Slate",
 				"SlateCore",
-				"UMG"
+				"UMG",
+				"TapDB"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -54,7 +55,8 @@ public class XDGCommon : ModuleRules
 				"CoreUObject",
 				"Slate",
 				"SlateCore",
-				"UMG"
+				"UMG",
+				"TapDB"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

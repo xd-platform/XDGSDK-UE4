@@ -4,7 +4,7 @@
 ![plugins](./Demo_4.27/image/plugins.png)
 
 #### 2.配置Bootstrap数据
-如果看不到该配置，请重启UE4开发工具。在项目中添加 `SampleDynamicProperties.h`  和 `SampleDynamicProperties.c++` 读取配置信息。
+如果看不到该配置，请重启UE4开发工具。
 ![boot](./Demo_4.27/image/boot.png)
 
 
@@ -19,6 +19,10 @@
 
 把`XDGCommon/Source/XDGCommon/XDGCommon_Android_UPL.xml` 中 `addElements`里的参数配置成自己的。
 
+##### 4.1如果接入的时候有报谷歌gms包冲突的话，可以修改 `Engine/Build/Android/Java/aar-imports.txt`中对应的gms版本号。
+![plugins](./Demo_4.27/image/gms01.png)
+![plugins](./Demo_4.27/image/gms02.png)
+![plugins](./Demo_4.27/image/gms03.png)
 
 
 ## XDGCommon 使用
@@ -81,10 +85,16 @@ static void EventCompletedTutorial();
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void EventCreateRole();
 
-//分享
+//分享文本
+//type: 0Facebook   1Line  2Twitter
+//uri: 连接
+//message: 文本
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void ShareFlavors(int32 type, FString uri, FString message);
 
+//分享图片
+//type: 0Facebook   1Line  2Twitter
+//imagePath: 区分平台，iOS的沙盒图片路径  或者 安卓图片存储路径
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void ShareImage(int32 type, FString imagePath);
 
