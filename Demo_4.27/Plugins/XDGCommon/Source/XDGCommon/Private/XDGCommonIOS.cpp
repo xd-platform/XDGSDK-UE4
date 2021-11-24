@@ -133,6 +133,10 @@ void XDGCommonIOS::ShareImage(int32 type, FString imagePath){
             image = [UIImage imageWithContentsOfFile:str];
         }
 
+        // 沙盒测试路径，代码测试用
+        // NSString* path = [[NSBundle mainBundle] pathForResource:@"XDGResources" ofType:@"bundle"];
+        // NSString* str = [path stringByAppendingString:@"/tds_apple_icon@3x.png"];
+
         if (!image || image == nil) {
             NSError *error = [NSError errorWithDomain:@"com.tdsglobal.share" code:-1 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat: @"can not find image with path:%@",imagePath.GetNSString()]}];
             [XDGUE4CommonTool shareWithResult:error cancel:NO];
