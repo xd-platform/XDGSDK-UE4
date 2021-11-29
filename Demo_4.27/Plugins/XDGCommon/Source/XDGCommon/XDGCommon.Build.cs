@@ -96,6 +96,21 @@ public class XDGCommon : ModuleRules
 						"../ThirdParty/AppsFlyerLib.embeddedframework.zip"
                     )
                 );
+
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FBAEMKit",
+						"../ThirdParty/FBAEMKit.embeddedframework.zip"
+                    )
+                );
+
+				PublicAdditionalFrameworks.Add(
+                    new Framework(
+						"FBSDKCoreKit_Basics",
+						"../ThirdParty/FBSDKCoreKit_Basics.embeddedframework.zip"
+                    )
+                );
+
 				PublicAdditionalFrameworks.Add(
                     new Framework(
 						"FBSDKCoreKit",
@@ -246,9 +261,9 @@ public class XDGCommon : ModuleRules
 				);
 
 				PublicSystemLibraryPaths.Add("/usr/lib/swift");
-				// PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility51.a"));
-                // PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility50.a"));
-                // PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibilityDynamicReplacements.a")); 
+				PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility51.a"));
+                PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibility50.a"));
+                PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "../ThirdParty/libswiftCompatibilityDynamicReplacements.a")); 
 
 				//bundle
 				AdditionalBundleResources.Add(new BundleResource(Path.Combine(ModuleDirectory, "./iOS/iOSConfigs/GoogleSignIn.bundle")));
