@@ -8,7 +8,6 @@
   <resourceCopies>
 		<log text="common ios copy resource" />
     <copyDir src="$S(PluginDir)/../../Source/XDGCommon/iOS/iOSConfigs/" dst="$S(BuildDir)/iOSConfigs/" />
-    <copyDir src="$S(BuildDir)/Frameworks" dst="$S(BuildDir)/SwiftSupport/iphoneos" />
 	</resourceCopies>
 
   <iosPListUpdates>
