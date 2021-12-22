@@ -57,10 +57,16 @@ void XDGPaymentIOS::PayWithProduct(FString orderId,
                             FString roleId,
                             FString serverId,
                             FString ext){
-    dispatch_async(dispatch_get_main_queue(), ^{                            
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //正式代码                            
         [XDGPayment payWithOrderId:orderId.GetNSString() productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
             [XDGUE4PaymentTool bridgePayCallback:orderInfo error:error];
         }];   
+
+         //测试代码 orderId 不能重复
+        //  [XDGPayment payWithOrderId:[XDGUE4PaymentTool randomStr] productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
+        //     [XDGUE4PaymentTool bridgePayCallback:orderInfo error:error];
+        // }];   
      });                            
 }
 

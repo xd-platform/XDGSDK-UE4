@@ -102,12 +102,11 @@ void XDGCommonAndroid::Report(FString serverId, FString roleId, FString roleName
                                               "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
         if (jMethod)
         {
-            auto jActivity = FAndroidApplication::GetGameActivityThis();
             auto jServerId = env->NewStringUTF(TCHAR_TO_ANSI(*serverId));
             auto jRoleId = env->NewStringUTF(TCHAR_TO_ANSI(*roleId));
             auto jRoleName = env->NewStringUTF(TCHAR_TO_ANSI(*roleName));
 
-            env->CallStaticVoidMethod(jXDSDKUnreal4Class, jMethod, jActivity, jServerId, jRoleId, jRoleName);
+            env->CallStaticVoidMethod(jXDSDKUnreal4Class, jMethod, jServerId, jRoleId, jRoleName);
             env->DeleteLocalRef(jServerId);
             env->DeleteLocalRef(jRoleId);
             env->DeleteLocalRef(jRoleName);
