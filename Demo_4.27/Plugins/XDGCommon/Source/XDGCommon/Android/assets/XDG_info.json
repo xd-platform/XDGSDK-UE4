@@ -54,5 +54,6 @@
     "tapdb_enabled": true,
     "tapdb_channel": "tapdb_channel_1",
     "server_url": "https://jfqhf3x9.cloud.tds1.tapapis.cn"
-  }
+  },
+  "base_url": "http://test-xdsdk-intnl-6.xd.com"
 }
