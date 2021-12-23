@@ -88,7 +88,7 @@ public class XDGAccountUnreal4{
             @Override
             public void run() {
                 if (!TextUtils.isEmpty(loginType)) {
-                    XDGAccount.loginByType(LoginEntriesHelper.getLoginEntryTypeByName(loginType), new Callback<XDGUser>() {
+                    XDGAccount.loginByType(LoginEntriesHelper.getLoginTypeForLogin(loginType), new Callback<XDGUser>() {
                         @Override
                         public void onCallback(XDGUser user, XDGError tdsServerError) {
                             constructorUserForBridge(user, tdsServerError, true);

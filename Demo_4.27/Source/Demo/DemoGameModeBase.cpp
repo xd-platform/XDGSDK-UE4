@@ -60,7 +60,7 @@ void ADemoGameModeBase::OnXDGSDKLoginSucceed(const FString& userJson){
 
 void ADemoGameModeBase::OnXDGSDKLoginFailed(const int32 code, const FString& msg){
     UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKLoginFailed"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKLoginFailed: ");
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKLoginFailed: " + msg);
 }
 
 void ADemoGameModeBase::OnXDGSDKGetUserSucceed(const FString& userJson){
