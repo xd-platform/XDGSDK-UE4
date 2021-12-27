@@ -33,6 +33,7 @@ UTapBootstrapBPLibrary::UTapBootstrapBPLibrary(const FObjectInitializer& ObjectI
 {
 #if PLATFORM_ANDROID || PLATFORM_IOS
 	GetBridge()->Register(TEXT(TAP_BOOTSTRAP_CLZ),TEXT(TAP_BOOTSTRAP_IMPL));
+	GetBridge()->Register(TEXT("com.taptap.sdk.wrapper.TDSLoginService"),TEXT("com.taptap.sdk.wrapper.TDSLoginServiceImpl"));
     FTapCommonModule::OnBridgeCallback.AddUObject(this, &UTapBootstrapBPLibrary::OnBridgeCallback);
 #endif
 }
@@ -74,7 +75,7 @@ void UTapBootstrapBPLibrary::RegisterLoginResultListener(){
 
 void UTapBootstrapBPLibrary::GetTestQualification(){
 #if PLATFORM_ANDROID || PLATFORM_IOS
-    FString commandJson = TapJson::ConstructorCommand(TEXT(TAP_BOOTSTRAP_SERVICE),TEXT("getTestQualification"),TEXT(""),true,TEXT(TAP_BOOTSTRAP_GET_TEST_QUALIFICATION_ID),true);
+    FString commandJson = TapJson::ConstructorCommand(TEXT("TDSLoginService"),TEXT("getTestQualification"),TEXT(""),true,TEXT(TAP_BOOTSTRAP_GET_TEST_QUALIFICATION_ID),true);
     GetBridge()->CallHandler(commandJson);
 #endif
 }

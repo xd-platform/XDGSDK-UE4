@@ -22,6 +22,8 @@
 		<string>C91pZh9OJNt7oDPx3lku4H01HelnYjSBS1jaZJed</string>
 		<key>server_url</key>
 		<string>https://jfqhf3x9.cloud.tds1.tapapis.cn</string>
+		<key>tapdb_enabled</key>
+		<true/>
 	</dict>
 	<key>twitter</key>
 	<dict>
