@@ -2,6 +2,10 @@ currentBranch=$(git symbolic-ref --short -q HEAD)
 
 remoteRepo=github_sdk
 
+git tag $1
+
+isRelease=$2 #是否正式发布，测试发布时发布到suguiming的个人目录下
+
 git tag -d $(git tag)
   
 git branch -D main
@@ -10,11 +14,14 @@ git subtree split --prefix=Plugins --branch main
   
 git remote rm $remoteRepo
   
-git remote add $remoteRepo git@github.com:suguiming/XDGSDK-UE4.git
+
+if [ $isRelease = true ]; then
+   git remote add $remoteRepo git@github.com:xd-platform/XDGSDK-UE4.git
+else
+   git remote add $remoteRepo git@github.com:suguiming/XDGSDK-UE4.git
+fi;
 
 git checkout main --force
-  
-git tag $1
   
 git fetch --unshallow main
   
