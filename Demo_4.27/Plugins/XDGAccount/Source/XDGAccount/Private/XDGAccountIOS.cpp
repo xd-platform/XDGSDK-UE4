@@ -16,20 +16,24 @@ XDGAccountIOS::~XDGAccountIOS()
 }
 
 void XDGAccountIOS::Login(){
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [XDGAccount login:^(XDGUser * _Nullable result, NSError * _Nullable error) {
-           [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
-        }]; 
-    });
+   [XDGUE4AccountTool enableTap:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [XDGAccount login:^(XDGUser * _Nullable result, NSError * _Nullable error) {
+             [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
+           }]; 
+        });
+    }];
 }
 
 void XDGAccountIOS::LoginByType(FString loginType){
-    dispatch_async(dispatch_get_main_queue(), ^{
-        LoginEntryType type = [XDGEntryType entryTypeByString:loginType.GetNSString()];
-        [XDGAccount loginByType:type loginHandler:^(XDGUser * _Nullable result, NSError * _Nullable error) {
-            [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
-        }]; 
-    });
+    [XDGUE4AccountTool enableTap:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+          LoginEntryType type = [XDGEntryType entryTypeByString:loginType.GetNSString()];
+          [XDGAccount loginByType:type loginHandler:^(XDGUser * _Nullable result, NSError * _Nullable error) {
+              [XDGUE4AccountTool bridgeUserCallback:result error:error isLogin: YES];
+          }]; 
+       });
+    }];
 }
 
 void XDGAccountIOS::AddUserStatusChangeCallback(){
@@ -73,6 +77,16 @@ void XDGAccountIOS::LoginSync(){
 
 //-------ios 源代码-------
 @implementation XDGUE4AccountTool
+NSTimeInterval lastClick;        //防止重复点击
+NSTimeInterval gapTime = 1000;   //点击间隔毫秒 
+
++ (void)enableTap:(VoidTapCallback) block{
+    NSTimeInterval time = [[NSDate date] timeIntervalSince1970] * 1000;
+    if ((time - lastClick) > gapTime) {
+        lastClick = time;
+        block();
+    }
+}
 
 + (void)bridgeUserCallback:(XDGUser *)user error:(NSError *)error isLogin: (Boolean)isLogin{
     if (error != nil) {

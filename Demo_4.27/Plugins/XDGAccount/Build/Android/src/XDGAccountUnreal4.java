@@ -28,14 +28,20 @@ import java.util.Map;
 
 public class XDGAccountUnreal4{
 
+    private static long lastClick = 0; //防止重复点击
+    private static int gapTime = 1000; //点击间隔毫秒
+
     public static void login(){
-         print("点击 Login");
-         XDGAccount.login(new Callback<XDGUser>() {
-            @Override
-            public void onCallback(XDGUser tdsGlobalUser, XDGError tdsServerError) {
-               constructorUserForBridge(tdsGlobalUser, tdsServerError, true);
-            }
-        });
+        if (System.currentTimeMillis() - lastClick > gapTime) {
+            print("点击 Login");
+            lastClick = System.currentTimeMillis();
+            XDGAccount.login(new Callback<XDGUser>() {
+                @Override
+                public void onCallback(XDGUser tdsGlobalUser, XDGError tdsServerError) {
+                constructorUserForBridge(tdsGlobalUser, tdsServerError, true);
+                }
+            });   
+         }
     }
 
      private static void constructorUserForBridge(XDGUser xdgUser, XDGError tdsServerError, boolean isLogin) {
@@ -82,21 +88,23 @@ public class XDGAccountUnreal4{
     }
 	
     public static void loginByType(String loginType){
-        print("点击  LoginByType");
-
-         new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                if (!TextUtils.isEmpty(loginType)) {
-                    XDGAccount.loginByType(LoginEntriesHelper.getLoginTypeForLogin(loginType), new Callback<XDGUser>() {
-                        @Override
-                        public void onCallback(XDGUser user, XDGError tdsServerError) {
-                            constructorUserForBridge(user, tdsServerError, true);
-                        }
-                    });
+         if (System.currentTimeMillis() - lastClick > gapTime) {
+            print("点击  LoginByType");
+            lastClick = System.currentTimeMillis();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    if (!TextUtils.isEmpty(loginType)) {
+                        XDGAccount.loginByType(LoginEntriesHelper.getLoginTypeForLogin(loginType), new Callback<XDGUser>() {
+                            @Override
+                            public void onCallback(XDGUser user, XDGError tdsServerError) {
+                                constructorUserForBridge(user, tdsServerError, true);
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+         }
     }
 	
     public static void addUserStatusChangeCallback(){

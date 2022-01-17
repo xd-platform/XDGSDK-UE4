@@ -31,6 +31,8 @@ public:
 };
 
 @interface XDGUE4AccountTool : NSObject
+typedef void (^VoidTapCallback)(void);
++ (void)enableTap:(VoidTapCallback) block;
 + (void)bridgeUserCallback:(XDGUser *)user error:(NSError *)error isLogin: (Boolean)isLogin;
 @end
 
