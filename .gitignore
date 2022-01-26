@@ -8,6 +8,19 @@ XDGSDK/Saved/
 **/Binaries/
 
 
+Demo_4.27/Test/*
+Demo_4.27/Saved/*
+Demo_4.27/Intermediate/*
+Demo_4.27/Binaries/*
+Demo_4.27/DerivedDataCache/*
+
+Demo_4.27/Plugins/*/Saved/*
+Demo_4.27/Plugins/*/Intermediate/*
+Demo_4.27/Plugins/*/Binaries/*
+Demo_4.27/Plugins/*/DerivedDataCache/*
+
+
+
 # Compiled Object files
 *.slo
 *.lo
