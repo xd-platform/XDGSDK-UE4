@@ -22,7 +22,7 @@ public:
             return FModuleManager::Get().IsModuleLoaded( "XDGCommon" );
       }
 
-	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKInitSucceed, const bool);
+	DECLARE_MULTICAST_DELEGATE_TwoParams(FXDGSDKInitSucceed, const bool, const FString&);
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKShareCompleted, const int32);
     DECLARE_MULTICAST_DELEGATE_FourParams(FXDGSDKGetRegionInfoCompleted, const FString&, const FString&, const FString&, const FString&);
    

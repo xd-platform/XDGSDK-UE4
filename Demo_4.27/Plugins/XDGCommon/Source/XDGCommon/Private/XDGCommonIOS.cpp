@@ -70,13 +70,22 @@ void XDGCommonIOS::SetLanguage(int32 langType){
 }
 
 void XDGCommonIOS::InitSDK(){
-    [XDGSDK initSDK:^(BOOL success) {
+    NSDictionary *tapConfig = [XDGGameDataManager configTapDict];
+    [XDGSDK initSDK:^(BOOL success, NSString *msg) {
         if (success) {
-            NSLog(@"初始化 成功");
+            NSLog(@"初始化 成功： %@", msg);
         }else {
-            NSLog(@"初始化 失败");
+            NSLog(@"初始化 失败： %@", msg);
         }
-        FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success);
+
+        NSDictionary *resultDic = @{
+            @"success":@(success),
+            @"message":msg,
+            @"configInfo":tapConfig
+        };
+
+        NSString* result = resultDic.tdsglobal_jsonString;
+        FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success, UTF8_TO_TCHAR([result UTF8String]));
     }];
 }
 

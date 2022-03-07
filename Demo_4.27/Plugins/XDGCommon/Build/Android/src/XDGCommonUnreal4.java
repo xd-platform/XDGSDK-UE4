@@ -49,10 +49,22 @@ public class XDGCommonUnreal4{
         print("点击初始化");
 
         if (!XDGSDK.isInitialized()) {
-            XDGSDK.initSDK(gameActivity, success -> {
-                nativeOnXDGSDKInitSucceed(success);
-            });
-        }
+         XDGSDK.initSDK(gameActivity, new XDGInitCallback() {
+            @Override
+            public void initCallback(boolean success, String message) {
+                Map<String, Object> params = new HashMap<>();
+                params.put("success", success);
+                params.put("configInfo", GlobalLocalConfig.INSTANCE.getGlobalLocalConfigInfo());
+                if (success) {
+                    params.put("message", "init success");
+                }else{
+                    params.put("message", message);
+                }
+                String result = BridgeJsonHelper.object2JsonString(params);
+                nativeOnXDGSDKInitSucceed(success, result);
+            }
+        });
+      }
     }
 
 
@@ -277,7 +289,7 @@ public class XDGCommonUnreal4{
 
 
     //------JNI 回调-------
-    public native static void nativeOnXDGSDKInitSucceed(boolean success);
+    public native static void nativeOnXDGSDKInitSucceed(boolean success, String result);
 
     //0成功，1取消，2失败
     public native static void nativeOnXDGSDKShareCompleted(int code);

@@ -135,6 +135,20 @@ void XDGPaymentIOS::PayWithChannel(FString orderId,
     //空
 }
 
+void XDGPaymentIOS::QueryInnerProductList(FString listJson){//安卓内嵌支付用
+//空
+} 
+
+void XDGPaymentIOS::InlinePay(FString orderId,  
+								FString productId,
+								FString productName,
+								FString region,
+								FString serverId,
+								FString roleId,
+								FString ext){
+//空
+}
+
 //iOS独有方法
 void XDGPaymentIOS::PurchaseToken(FString transactionIdentifier,
                             FString productIdentifier,

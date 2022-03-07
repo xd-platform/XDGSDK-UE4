@@ -26,6 +26,7 @@ public:
 	void OpenUserCenter();
 	void Logout();
 	void LoginSync();
+	void OpenAccountCancellation();
 };
 
 #endif 

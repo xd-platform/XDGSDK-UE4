@@ -42,6 +42,16 @@ public:
 								FString roleId,
 								FString serverId,
 								FString ext) = 0;
+
+	virtual void QueryInnerProductList(FString listJson) = 0; //安卓内嵌支付用
+
+	virtual void InlinePay(FString orderId,
+								FString productId,
+								FString productName,
+								FString region,
+								FString serverId,
+								FString roleId,
+								FString ext) = 0;
     
 	//iOS独有方法
 	virtual void PurchaseToken(FString transactionIdentifier,

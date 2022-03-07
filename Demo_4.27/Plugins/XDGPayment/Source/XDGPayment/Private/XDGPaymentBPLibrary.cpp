@@ -71,6 +71,26 @@ void UXDGPaymentBPLibrary::PayWithChannel(FString orderId,
     GetXDGPaymentBridge()->PayWithChannel(orderId, productId, roleId, serverId, ext);       
 }
 
+void UXDGPaymentBPLibrary::QueryInnerProductList(TArray<FString> productIds){
+    FString JsonOutString;
+    TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&JsonOutString);
+    Writer->WriteObjectStart();
+    Writer->WriteValue(TEXT("list"), productIds);
+    Writer->WriteObjectEnd();
+    Writer->Close();
+    GetXDGPaymentBridge()->QueryInnerProductList(JsonOutString);    
+}
+
+void UXDGPaymentBPLibrary::InlinePay(FString orderId,
+								FString productId,
+								FString productName,
+								FString region,
+								FString serverId,
+								FString roleId,
+								FString ext){
+    GetXDGPaymentBridge()->InlinePay(orderId, productId, productName, region, serverId, roleId, ext);
+}
+
 
 //iOS独有方法
 void UXDGPaymentBPLibrary::PurchaseToken(FString transactionIdentifier,

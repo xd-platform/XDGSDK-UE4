@@ -13,6 +13,7 @@ import com.xd.intl.payment.entities.PurchaseDetails;
 import com.xd.intl.payment.entities.RefundDetails;
 import com.xd.intl.payment.entities.TDSGlobalSkuDetails;
 import com.xd.intl.payment.entities.XDGTransactionInfo;
+import com.xd.intl.payment.entities.ProductSkuInfo;
 import com.xd.intl.payment.wallet.XDGPaymentResult;
 
 import org.json.JSONObject;
@@ -146,6 +147,44 @@ public class XDGPaymentUnreal4 {
         });
     }
 
+    
+    public static void queryProductList(String listJson) {
+        // Log.e(TAG, "打印结果：" + listJson);
+
+        // String[] productIds = getProductIdList(listJson);
+        // if (productIds != null && productIds.length > 0){
+        //     XDGPayment.queryProductList(Arrays.asList(productIds), new XDGPaymentCallback<List<ProductSkuInfo>>() {
+        //     @Override
+        //     public void onPaymentCallback(XDGPaymentResult result, List<ProductSkuInfo> data) {
+        //         Map<String, Object> params = new HashMap<>();
+        //         params.put("products", data);
+        //         if (result.code == Constants.PaymentResponseCode.OK) {
+        //             String json = BridgeJsonHelper.object2JsonString(params);
+        //             nativeOnXDGSDKQueryInnerProductsSucceed(json);
+        //         }else{
+        //             nativeOnXDGSDKQueryInnerProductsFailed(result.code, result.debugMessage);
+        //         }
+        //     }
+        // });
+        // }
+    }
+
+
+    public static void inlinePay(String orderId, String productId, String productName, String region, String serverId, String roleId, String ext) {
+        // Log.i(TAG, "orderId:" + orderId + " productId:" + productId + " productName:" + productName + " region:" + region + " serverId:" + serverId + " roleId:" + roleId + " ext:" + ext);
+       
+        // XDGPayment.inlinePay(orderId, productId, productName, region, serverId, roleId, ext, new XDGPaymentCallback<Object>() {
+        //     @Override
+        //     public void onPaymentCallback(XDGPaymentResult result, Object data) {
+        //         Map<String, Object> resultMap = new HashMap<>(2);
+        //         resultMap.put("code", result.code);
+        //         resultMap.put("message", result.debugMessage);
+        //         String resultJson = BridgeJsonHelper.object2JsonString(resultMap);
+        //         nativeOnXDGSDKInlinePayPaymentCompleted(resultJson);
+        //     }
+        // });
+    }
+
     private static void handlerOrderInfoToBridge(String orderId, String productId, String roleId, String serverId, int code, String message) {
         print("结果：code = " + code + "   message = " + message);
         if (code == Constants.PaymentResponseCode.OK) {
@@ -190,6 +229,12 @@ public class XDGPaymentUnreal4 {
     public native static void nativeOnXDGSDKQueryProductIdsSucceed(String resultJson);
 
     public native static void nativeOnXDGSDKQueryProductIdsFailed(int code, String msg);
+
+    public native static void nativeOnXDGSDKQueryInnerProductsSucceed(String resultJson);
+
+    public native static void nativeOnXDGSDKQueryInnerProductsFailed(int code, String msg);
+
+    public native static void nativeOnXDGSDKInlinePayPaymentCompleted(String resultJson);
 
     public native static void nativeOnXDGSDKQueryRestoredPurchasesSucceed(String resultJson);
 

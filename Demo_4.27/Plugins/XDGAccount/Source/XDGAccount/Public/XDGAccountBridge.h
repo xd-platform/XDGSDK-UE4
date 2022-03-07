@@ -17,6 +17,7 @@ public:
 	virtual void OpenUserCenter() = 0;
 	virtual void Logout() = 0;
 	virtual void LoginSync() = 0;
+	virtual void OpenAccountCancellation() = 0;
 };
 
 XDGAccountBridge *GetXDGAccountBridge();

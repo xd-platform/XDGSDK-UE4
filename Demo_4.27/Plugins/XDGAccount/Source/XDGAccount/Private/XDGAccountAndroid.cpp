@@ -131,6 +131,11 @@ void XDGAccountAndroid::LoginSync(){
     env->DeleteLocalRef(jXDSDKUnreal4Class); 
 }
 
+void XDGAccountAndroid::OpenAccountCancellation(){
+   //安卓没有注销页面
+}
+
+
 
 #ifdef __cplusplus
 extern "C"

@@ -29,6 +29,11 @@ public:
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKQueryProductIdsSucceed, const FString&);
 	DECLARE_MULTICAST_DELEGATE_TwoParams(FXDGSDKQueryProductIdsFailed, const int32, const FString&);
 
+    //安卓内嵌支付用
+	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKQueryInnerProductsSucceed, const FString&);
+	DECLARE_MULTICAST_DELEGATE_TwoParams(FXDGSDKQueryInnerProductsFailed, const int32, const FString&);
+	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKInlinePayPaymentCompleted, const FString&);
+
 	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKQueryRestoredPurchasesSucceed, const FString&);
 	DECLARE_MULTICAST_DELEGATE_TwoParams(FXDGSDKQueryRestoredPurchasesFailed, const int32, const FString&);
 
@@ -48,6 +53,16 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
     static FXDGSDKQueryProductIdsFailed OnXDGSDKQueryProductIdsFailed;
+
+	//安卓内嵌支付用
+	UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
+    static FXDGSDKQueryInnerProductsSucceed OnXDGSDKQueryInnerProductsSucceed;
+
+	UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
+    static FXDGSDKQueryInnerProductsFailed OnXDGSDKQueryInnerProductsFailed;
+
+	UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
+    static FXDGSDKInlinePayPaymentCompleted OnXDGSDKInlinePayPaymentCompleted;
 
     //transactions数组json, 注意数组里ios和安卓的对象字段不一样的！
 	UPROPERTY(BlueprintAssignable, Category = "XDGPayment")

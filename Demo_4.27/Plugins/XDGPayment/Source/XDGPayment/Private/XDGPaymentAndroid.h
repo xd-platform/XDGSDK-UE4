@@ -50,6 +50,17 @@ public:
 								FString roleId,
 								FString serverId,
 								FString ext);
+								
+    void QueryInnerProductList(FString listJson); //安卓内嵌支付用
+
+	void InlinePay(FString orderId,  
+								FString productId,
+								FString productName,
+								FString region,
+								FString serverId,
+								FString roleId,
+								FString ext);
+
     
 	//iOS独有方法
 	void PurchaseToken(FString transactionIdentifier,

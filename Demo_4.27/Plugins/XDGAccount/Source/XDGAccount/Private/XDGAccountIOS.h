@@ -28,6 +28,7 @@ public:
 	void OpenUserCenter();
 	void Logout();
 	void LoginSync();
+	void OpenAccountCancellation();
 };
 
 @interface XDGUE4AccountTool : NSObject

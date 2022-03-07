@@ -75,6 +75,16 @@ void XDGAccountIOS::LoginSync(){
     }];
 }
 
+//打开注销页面
+void XDGAccountIOS::OpenAccountCancellation(){
+     dispatch_async(dispatch_get_main_queue(), ^{
+        [XDGAccount accountCancellation];
+        NSLog(@"打开注销页面");
+    });
+}
+
+
+
 //-------ios 源代码-------
 @implementation XDGUE4AccountTool
 NSTimeInterval lastClick;        //防止重复点击

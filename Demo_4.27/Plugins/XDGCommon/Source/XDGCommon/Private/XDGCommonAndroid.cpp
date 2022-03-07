@@ -351,9 +351,14 @@ extern "C"
 {
 #endif
 
-  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKInitSucceed(JNIEnv *jenv, jclass thiz, jboolean success)
+  __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKInitSucceed(JNIEnv *jenv, jclass thiz, jboolean success, jstring result)
     {
-        FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success);
+        const char *cResult = jenv->GetStringUTFChars(result, 0);
+        FString fResult = UTF8_TO_TCHAR(cResult);
+
+        FXDGCommonModule::OnXDGSDKInitSucceed.Broadcast((bool)success, fResult);
+
+        jenv->ReleaseStringUTFChars(result, cResult);
     }
 
   __attribute__((visibility("default"))) void Java_com_xd_XDGCommonUnreal4_nativeOnXDGSDKShareCompleted(JNIEnv *jenv, jclass thiz, int32 code)

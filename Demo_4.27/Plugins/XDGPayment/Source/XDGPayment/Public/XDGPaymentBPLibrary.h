@@ -16,7 +16,7 @@ class XDGPAYMENT_API UXDGPaymentBPLibrary : public UBlueprintFunctionLibrary
 
 	//ios 安卓都有的方法
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
-	static void QueryWithProductIdArray(TArray<FString> productIds);
+	static void QueryWithProductIdArray(TArray<FString> productIds);  //iOS苹果支付 和 安卓 谷歌支付用
 
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 	static void PayWithProduct(FString orderId,
@@ -53,6 +53,19 @@ class XDGPAYMENT_API UXDGPaymentBPLibrary : public UBlueprintFunctionLibrary
 								FString roleId,
 								FString serverId,
 								FString ext);
+
+	UFUNCTION(BlueprintCallable, Category = "XDGPayment") //安卓内嵌支付用
+	static void QueryInnerProductList(TArray<FString> productIds);
+
+	UFUNCTION(BlueprintCallable, Category = "XDGPayment") //安卓内嵌支付用
+	static void InlinePay(FString orderId,
+								FString productId,
+								FString productName,
+								FString region,
+								FString serverId,
+								FString roleId,
+								FString ext);
+
     
 	//iOS独有方法
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")

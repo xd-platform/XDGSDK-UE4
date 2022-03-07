@@ -16,7 +16,7 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 	virtual void BeginPlay() override;
 
     //XDGCommon
-	void OnXDGSDKInitSucceed(const bool);
+	void OnXDGSDKInitSucceed(const bool, const FString&);
 
     //0成功，1取消，2失败
     void OnXDGSDKShareCompleted(const int32);
@@ -44,6 +44,13 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
     void OnXDGSDKQueryProductIdsSucceed(const FString&);
 
     void OnXDGSDKQueryProductIdsFailed(const int32, const FString&);
+
+    //安卓内嵌支付用 
+    void OnXDGSDKQueryInnerProductsSucceed(const FString&);
+
+    void OnXDGSDKQueryInnerProductsFailed(const int32, const FString&);
+
+    void OnXDGSDKInlinePayPaymentCompleted(const FString&);
 
     void OnXDGSDKQueryRestoredPurchasesSucceed(const FString&);
 
