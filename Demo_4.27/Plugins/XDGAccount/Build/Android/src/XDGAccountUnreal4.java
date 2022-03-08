@@ -138,23 +138,6 @@ public class XDGAccountUnreal4{
         print("点击  Logout");
         XDGAccount.logout();
     }
-	
-    public static void loginSync(){
-        print("点击  LoginSync");
-
-        Callback<TapSessionToken> internalCallback = (tapSessionToken, tdsServerError) -> {
-            String sessionToken = "";
-            if (tapSessionToken != null) {
-               sessionToken = tapSessionToken.sessionToken;
-            }
-            nativeOnXDGSDKLoginSync(sessionToken);
-            print("token为: " + sessionToken);
-        };
-        TDSGlobalAccountComponent.INSTANCE.connectTDSServer()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new AbstractSubscriber<>(internalCallback));
-    }
 
     private static void print(String msg){
         Log.e(" ====== sdk log ====== ", msg);
@@ -170,7 +153,5 @@ public class XDGAccountUnreal4{
     public native static void nativeOnXDGSDKGetUserFailed(int code, String msg);
 
     public native static void nativeOnXDGSDKUserStateChanged(int code, String msg);
-
-    public native static void nativeOnXDGSDKLoginSync(String sessionToken);
 
 }

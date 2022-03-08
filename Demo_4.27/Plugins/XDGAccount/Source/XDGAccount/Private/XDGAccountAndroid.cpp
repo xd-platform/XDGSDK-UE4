@@ -115,21 +115,6 @@ void XDGAccountAndroid::Logout(){
     env->DeleteLocalRef(jXDSDKUnreal4Class); 
 }
 
-void XDGAccountAndroid::LoginSync(){
-    JNIEnv *env = FAndroidApplication::GetJavaEnv();
-    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_ACCOUNT);
-    if (jXDSDKUnreal4Class)
-    {
-        const char *strMethod = "loginSync";
-        auto jMethod = env->GetStaticMethodID(jXDSDKUnreal4Class, strMethod,
-                                              "()V");
-        if (jMethod)
-        {
-            env->CallStaticVoidMethod(jXDSDKUnreal4Class, jMethod);
-        }
-    }
-    env->DeleteLocalRef(jXDSDKUnreal4Class); 
-}
 
 void XDGAccountAndroid::OpenAccountCancellation(){
    //安卓没有注销页面
@@ -180,14 +165,6 @@ extern "C"
         FString fMsg = UTF8_TO_TCHAR(cMsg);
         FXDGAccountModule::OnXDGSDKUserStateChanged.Broadcast((int)code, fMsg);
         jenv->ReleaseStringUTFChars(msg, cMsg);
-    }
-
-      __attribute__((visibility("default"))) void Java_com_xd_XDGAccountUnreal4_nativeOnXDGSDKLoginSync(JNIEnv *jenv, jclass thiz, jstring sessionToken)
-    {
-        const char *cSessionToken = jenv->GetStringUTFChars(sessionToken, 0);
-        FString fSessionToken = UTF8_TO_TCHAR(cSessionToken);
-        FXDGAccountModule::OnXDGSDKLoginSync.Broadcast(fSessionToken);
-        jenv->ReleaseStringUTFChars(sessionToken, cSessionToken);
     }
 
 #ifdef __cplusplus

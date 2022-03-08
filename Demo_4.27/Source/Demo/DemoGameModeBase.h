@@ -34,8 +34,6 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 
 	void OnXDGSDKUserStateChanged(const int32, const FString&);
 
-	void OnXDGSDKLoginSync(const FString&);
-
 	//XDGPayment
 	void OnXDGSDKPaymentSucceed(const FString&, const FString&, const FString&, const FString&);
 

@@ -43,10 +43,6 @@ void UXDGAccountBPLibrary::Logout(){
 #endif
 }
 
-void UXDGAccountBPLibrary::LoginSync(){
-    GetXDGAccountBridge()->LoginSync();
-}
-
 void UXDGAccountBPLibrary::OpenAccountCancellation(){
     GetXDGAccountBridge()->OpenAccountCancellation();
 }

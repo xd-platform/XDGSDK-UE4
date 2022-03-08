@@ -29,7 +29,6 @@ public:
     DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKGetUserSucceed, const FString&);
 	DECLARE_MULTICAST_DELEGATE_TwoParams(FXDGSDKGetUserFailed, const int32, const FString&);
     DECLARE_MULTICAST_DELEGATE_TwoParams(FXDGSDKUserStateChanged, const int32, const FString&);
-	DECLARE_MULTICAST_DELEGATE_OneParam(FXDGSDKLoginSync, const FString&);
    
     UPROPERTY(BlueprintAssignable, Category = "XDGAccount")
     static FXDGSDKLoginSucceed OnXDGSDKLoginSucceed;
@@ -45,7 +44,4 @@ public:
 
     UPROPERTY(BlueprintAssignable, Category = "XDGAccount")
     static FXDGSDKUserStateChanged OnXDGSDKUserStateChanged;
-
-	UPROPERTY(BlueprintAssignable, Category = "XDGAccount")
-    static FXDGSDKLoginSync OnXDGSDKLoginSync;
 };

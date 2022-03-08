@@ -33,9 +33,6 @@ class XDGACCOUNT_API UXDGAccountBPLibrary : public UBlueprintFunctionLibrary
 	static void Logout();
 
 	UFUNCTION(BlueprintCallable, Category = "XDGAccount")
-	static void LoginSync();
-
-	UFUNCTION(BlueprintCallable, Category = "XDGAccount")
 	static void OpenAccountCancellation();
 
 };

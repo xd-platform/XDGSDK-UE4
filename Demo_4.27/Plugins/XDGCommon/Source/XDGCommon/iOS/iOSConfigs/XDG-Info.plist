@@ -40,7 +40,9 @@
 	<key>facebook</key>
 	<dict>
 		<key>app_id</key>
-		<string>458469102360728</string>
+		<string>333676195299012</string>
+		<key>client_token</key>
+		<string>52372eb46fd7343e588160c51ca0955d</string>
 	</dict>
 	<key>google</key>
 	<dict>

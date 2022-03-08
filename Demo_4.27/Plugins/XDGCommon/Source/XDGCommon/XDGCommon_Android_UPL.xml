@@ -39,11 +39,11 @@
         <addAttribute tag="application" name="android:networkSecurityConfig" value="@xml/network_security_config"/>
 
 
-        <!--3. 注意，要把下面的 458469102360728 配置成自己的facebook参数  -->
+        <!--3. 注意，要把下面的 333676195299012 配置成自己的facebook参数  -->
         <addElements tag="application"> 
             <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
-                android:value="fb458469102360728" />
+                android:value="fb333676195299012" />
 
             <meta-data
                 android:name="firebase_performance_logcat_enabled"
@@ -61,13 +61,13 @@
                 <intent-filter><action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.DEFAULT" />
                     <category android:name="android.intent.category.BROWSABLE" />
-                    <data android:scheme="fb458469102360728" />
+                    <data android:scheme="fb333676195299012" />
                 </intent-filter>
             </activity>
 
             <provider
                 android:name="com.facebook.FacebookContentProvider"
-                android:authorities="com.facebook.app.FacebookContentProvider458469102360728"
+                android:authorities="com.facebook.app.FacebookContentProvider333676195299012"
                 android:exported="true" />
         </addElements>
     </androidManifestUpdates>
@@ -89,7 +89,7 @@
 				implementation "com.google.firebase:firebase-messaging:21.1.0"
 
                 <!-- appsflyer -->
-                implementation "com.appsflyer:af-android-sdk:6.4.3"
+                implementation "com.appsflyer:af-android-sdk:6.5.2"
 				implementation "com.android.installreferrer:installreferrer:2.2"
                 <!-- adjust -->
                 implementation "com.adjust.sdk:adjust-android:4.24.1"

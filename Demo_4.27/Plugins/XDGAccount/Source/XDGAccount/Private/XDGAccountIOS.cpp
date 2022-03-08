@@ -63,18 +63,6 @@ void XDGAccountIOS::Logout(){
     });
 }
 
-void XDGAccountIOS::LoginSync(){
-    [XDGAccount loginSync:^(NSDictionary * _Nullable result, NSError * _Nullable error) {
-        NSString* sessionToken = @"";
-        if(result != nil){
-          sessionToken = [result objectForKey:@"sessionToken"];
-        }
-
-        NSLog(@"sessionToken 值： %@", sessionToken);
-        FXDGAccountModule::OnXDGSDKLoginSync.Broadcast(UTF8_TO_TCHAR([sessionToken UTF8String]));
-    }];
-}
-
 //打开注销页面
 void XDGAccountIOS::OpenAccountCancellation(){
      dispatch_async(dispatch_get_main_queue(), ^{

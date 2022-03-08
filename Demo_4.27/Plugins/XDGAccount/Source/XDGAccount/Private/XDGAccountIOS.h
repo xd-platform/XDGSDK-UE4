@@ -27,7 +27,6 @@ public:
     void GetUser();
 	void OpenUserCenter();
 	void Logout();
-	void LoginSync();
 	void OpenAccountCancellation();
 };
 

@@ -18,7 +18,6 @@ void ADemoGameModeBase::BeginPlay(){
     FXDGAccountModule::OnXDGSDKGetUserSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKGetUserSucceed);
     FXDGAccountModule::OnXDGSDKGetUserFailed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKGetUserFailed);
     FXDGAccountModule::OnXDGSDKUserStateChanged.AddUObject(this, &ADemoGameModeBase::OnXDGSDKUserStateChanged);
-    FXDGAccountModule::OnXDGSDKLoginSync.AddUObject(this, &ADemoGameModeBase::OnXDGSDKLoginSync);
 
     //XDGPayment
     FXDGPaymentModule::OnXDGSDKPaymentSucceed.AddUObject(this, &ADemoGameModeBase::OnXDGSDKPaymentSucceed);
@@ -82,11 +81,6 @@ void ADemoGameModeBase::OnXDGSDKGetUserFailed(const int32 code, const FString& m
 void ADemoGameModeBase::OnXDGSDKUserStateChanged(const int32 code, const FString& msg){
     UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKUserStateChanged"));
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKUserStateChanged: ");
-}
-
-void ADemoGameModeBase::OnXDGSDKLoginSync(const FString& sessionToken){
-    UE_LOG(LogTemp, Log, TEXT("点击了 OnXDGSDKLoginSync"));
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKLoginSync: ");
 }
 
 

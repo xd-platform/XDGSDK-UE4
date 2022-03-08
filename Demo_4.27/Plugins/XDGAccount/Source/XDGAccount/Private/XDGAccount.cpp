@@ -9,7 +9,6 @@ FXDGAccountModule::FXDGSDKLoginFailed FXDGAccountModule::OnXDGSDKLoginFailed;
 FXDGAccountModule::FXDGSDKGetUserSucceed FXDGAccountModule::OnXDGSDKGetUserSucceed;
 FXDGAccountModule::FXDGSDKGetUserFailed FXDGAccountModule::OnXDGSDKGetUserFailed;
 FXDGAccountModule::FXDGSDKUserStateChanged FXDGAccountModule::OnXDGSDKUserStateChanged;
-FXDGAccountModule::FXDGSDKLoginSync FXDGAccountModule::OnXDGSDKLoginSync;
 
 IMPLEMENT_MODULE(FXDGAccountModule, XDGAccount)
 void FXDGAccountModule::StartupModule()
