@@ -58,8 +58,10 @@ void UXDGPaymentBPLibrary::RestorePurchase(FString purchaseToken,
 
 
 void UXDGPaymentBPLibrary::PayWithWeb(FString serverId,
-                                      FString roleId){
-    GetXDGPaymentBridge()->PayWithWeb(serverId, roleId);                                       
+                                      FString roleId,
+						        	FString productId, 
+						        	FString extras){
+    GetXDGPaymentBridge()->PayWithWeb(serverId, roleId, productId, extras);                                       
 }
 
 
@@ -69,26 +71,6 @@ void UXDGPaymentBPLibrary::PayWithChannel(FString orderId,
                                         FString serverId,
                                         FString ext){
     GetXDGPaymentBridge()->PayWithChannel(orderId, productId, roleId, serverId, ext);       
-}
-
-void UXDGPaymentBPLibrary::QueryInnerProductList(TArray<FString> productIds){
-    FString JsonOutString;
-    TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&JsonOutString);
-    Writer->WriteObjectStart();
-    Writer->WriteValue(TEXT("list"), productIds);
-    Writer->WriteObjectEnd();
-    Writer->Close();
-    GetXDGPaymentBridge()->QueryInnerProductList(JsonOutString);    
-}
-
-void UXDGPaymentBPLibrary::InlinePay(FString orderId,
-								FString productId,
-								FString productName,
-								FString region,
-								FString serverId,
-								FString roleId,
-								FString ext){
-    GetXDGPaymentBridge()->InlinePay(orderId, productId, productName, region, serverId, roleId, ext);
 }
 
 

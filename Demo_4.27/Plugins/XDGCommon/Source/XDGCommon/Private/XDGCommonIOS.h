@@ -15,6 +15,7 @@
 #import <XDGCommonSDK/XDGSDKSettings.h>
 #import <XDGCommonSDK/XDGGameDataManager.h>
 #import <TDSGlobalSDKCommonKit/NSDictionary+TDSGlobalJson.h>
+#import <XDGCommonSDK/XDGCoreService.h>
 
 
 class  XDGCommonIOS : public XDGCommonBridge
@@ -42,8 +43,9 @@ public:
 
 	void SetCurrentUserPushServiceEnable(bool enable);
 	bool IsCurrentUserPushServiceEnable();
-
 	void GetRegionInfo();
+
+	 void DevelopUrlInit();
 };
 
 @interface XDGUE4CommonTool : NSObject

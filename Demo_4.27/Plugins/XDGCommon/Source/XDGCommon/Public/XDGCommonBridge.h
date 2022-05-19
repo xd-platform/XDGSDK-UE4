@@ -31,6 +31,8 @@ public:
 	virtual bool IsCurrentUserPushServiceEnable() = 0;
 
 	virtual void GetRegionInfo() = 0;
+
+	virtual void DevelopUrlInit() = 0; //设置测试环境url初始化,开发测试用，发布版里面实现会注销
 	
 };
 

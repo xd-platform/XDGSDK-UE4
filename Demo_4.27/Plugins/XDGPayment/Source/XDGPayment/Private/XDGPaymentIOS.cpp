@@ -57,8 +57,19 @@ void XDGPaymentIOS::PayWithProduct(FString orderId,
                             FString roleId,
                             FString serverId,
                             FString ext){
-    dispatch_async(dispatch_get_main_queue(), ^{                     
-        [XDGPayment payWithOrderId:orderId.GetNSString() productId:productId.GetNSString() roleId:roleId.GetNSString() serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
+    dispatch_async(dispatch_get_main_queue(), ^{ 
+           NSString* oid = orderId.GetNSString();
+           NSString* pid = productId.GetNSString();
+           NSString* rid = roleId.GetNSString();     
+
+           //测试代码---start
+            oid = @"";
+            NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
+            rid = [df objectForKey:@"demo_tmp_userId"];
+            NSLog(@"payment saved userId df get:%@", rid);
+           //测试代码---end
+
+        [XDGPayment payWithOrderId:oid productId:pid roleId:rid serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
             [XDGUE4PaymentTool bridgePayCallback:orderInfo error:error];
         }];   
      });                            
@@ -122,7 +133,9 @@ void XDGPaymentIOS::RestorePurchase(FString purchaseToken,
 
 
 void XDGPaymentIOS::PayWithWeb(FString serverId,
-                              FString roleId){
+                              FString roleId,
+						    FString productId, 
+							FString extras){
     //空
 }
 
@@ -135,19 +148,7 @@ void XDGPaymentIOS::PayWithChannel(FString orderId,
     //空
 }
 
-void XDGPaymentIOS::QueryInnerProductList(FString listJson){//安卓内嵌支付用
-//空
-} 
 
-void XDGPaymentIOS::InlinePay(FString orderId,  
-								FString productId,
-								FString productName,
-								FString region,
-								FString serverId,
-								FString roleId,
-								FString ext){
-//空
-}
 
 //iOS独有方法
 void XDGPaymentIOS::PurchaseToken(FString transactionIdentifier,

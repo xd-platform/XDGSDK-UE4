@@ -346,6 +346,30 @@ void XDGCommonAndroid::GetRegionInfo(){
     env->DeleteLocalRef(jXDSDKUnreal4Class);   
 }
 
+
+void XDGCommonAndroid::DevelopUrlInit(){
+    JNIEnv *env = FAndroidApplication::GetJavaEnv();
+    auto jXDSDKUnreal4Class = FAndroidApplication::FindJavaClass(UNREAL4_CLASS_NAME_COMMON);
+    if (jXDSDKUnreal4Class)
+    {
+        const char *strMethod = "developUrlInit";
+        auto jMethod = env->GetStaticMethodID(jXDSDKUnreal4Class, strMethod,
+                                              "(Landroid/app/Activity;)V");
+        if (jMethod)
+        {
+            auto jActivity = FAndroidApplication::GetGameActivityThis();
+            env->CallStaticVoidMethod(jXDSDKUnreal4Class, jMethod, jActivity);
+        }
+    }
+    env->DeleteLocalRef(jXDSDKUnreal4Class); 
+} 
+
+
+
+
+
+
+
 #ifdef __cplusplus
 extern "C"
 {

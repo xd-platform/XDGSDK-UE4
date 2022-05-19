@@ -5,6 +5,9 @@
 #include "XDGCommonBridge.h"
 #include "Engine.h"
 
+#include "CoreMinimal.h"
+#include "GameFramework/GameModeBase.h"
+
 UXDGCommonBPLibrary::UXDGCommonBPLibrary(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
 }
@@ -78,5 +81,14 @@ bool UXDGCommonBPLibrary::IsCurrentUserPushServiceEnable(){
 
 void UXDGCommonBPLibrary::GetRegionInfo(){
     GetXDGCommonBridge()->GetRegionInfo();
+}
+
+ void UXDGCommonBPLibrary::DevelopUrlInit(){
+    GetXDGCommonBridge()->DevelopUrlInit();
+ }
+
+ void UXDGCommonBPLibrary::ShowTest(){
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,  TEXT("OnXDGSDKInitSucceed3 中文 ศูนย์ความปลอดภัยบัญชี"), true, FVector2D(2, 2));
+    // GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKInitSucceed 中文 ศูนย์ความปลอดภัยบัญชี");
 }
 

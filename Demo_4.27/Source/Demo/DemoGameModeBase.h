@@ -43,13 +43,6 @@ class DEMO_API ADemoGameModeBase : public AGameModeBase
 
     void OnXDGSDKQueryProductIdsFailed(const int32, const FString&);
 
-    //安卓内嵌支付用 
-    void OnXDGSDKQueryInnerProductsSucceed(const FString&);
-
-    void OnXDGSDKQueryInnerProductsFailed(const int32, const FString&);
-
-    void OnXDGSDKInlinePayPaymentCompleted(const FString&);
-
     void OnXDGSDKQueryRestoredPurchasesSucceed(const FString&);
 
     void OnXDGSDKQueryRestoredPurchasesFailed(const int32, const FString&);

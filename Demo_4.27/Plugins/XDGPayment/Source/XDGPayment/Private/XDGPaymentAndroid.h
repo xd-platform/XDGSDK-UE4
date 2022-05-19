@@ -43,22 +43,14 @@ public:
 								FString ext);
 
 	void PayWithWeb(FString serverId,
-							FString roleId);
+							FString roleId,
+							FString productId, 
+							FString extras);
 
 	void PayWithChannel(FString orderId,
 								FString productId,
 								FString roleId,
 								FString serverId,
-								FString ext);
-								
-    void QueryInnerProductList(FString listJson); //安卓内嵌支付用
-
-	void InlinePay(FString orderId,  
-								FString productId,
-								FString productName,
-								FString region,
-								FString serverId,
-								FString roleId,
 								FString ext);
 
     

@@ -26,7 +26,7 @@ public:
 
 	virtual void CheckRefundStatusWithUI() = 0;
 
-	//安卓独有方法
+	//安卓独有方法 （sdk没测，没用的，先放着）
 	virtual void RestorePurchase(FString purchaseToken,
 								FString productId,
 								FString orderId,
@@ -35,7 +35,9 @@ public:
 								FString ext) = 0;
 
 	virtual void PayWithWeb(FString serverId,
-							FString roleId) = 0;
+							FString roleId,
+							FString productId, 
+							FString extras) = 0;
 
 	virtual void PayWithChannel(FString orderId,
 								FString productId,
@@ -43,17 +45,7 @@ public:
 								FString serverId,
 								FString ext) = 0;
 
-	virtual void QueryInnerProductList(FString listJson) = 0; //安卓内嵌支付用
-
-	virtual void InlinePay(FString orderId,
-								FString productId,
-								FString productName,
-								FString region,
-								FString serverId,
-								FString roleId,
-								FString ext) = 0;
-    
-	//iOS独有方法
+	//iOS独有方法（sdk没测，没用的，先放着）
 	virtual void PurchaseToken(FString transactionIdentifier,
 								FString productIdentifier,
 								FString orderId,

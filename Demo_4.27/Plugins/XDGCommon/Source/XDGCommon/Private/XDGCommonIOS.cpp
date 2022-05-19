@@ -23,49 +23,7 @@ FString XDGCommonIOS::GetSDKVersionName(){
 }
 
 void XDGCommonIOS::SetLanguage(int32 langType){
-    XDGLanguageLocale type = XDGLanguageLocaleSimplifiedChinese;
-    switch (langType) {
-        case 1:
-            type = XDGLanguageLocaleTraditionalChinese;
-            break;
-        case 2:
-            type = XDGLanguageLocaleEnglish;
-            break;
-        case 3:
-            type = XDGLanguageLocaleThai;
-            break;
-        case 4:
-            type = XDGLanguageLocaleBahasa;
-            break;
-        case 5:
-            type = XDGLanguageLocaleKorean;
-            break;
-        case 6:
-            type = XDGLanguageLocaleJapanese;
-            break;
-        case 7:
-            type = XDGLanguageLocaleGerman;
-            break;
-        case 8:
-            type = XDGLanguageLocaleFrench;
-            break;
-        case 9:
-            type = XDGLanguageLocalePortuguese;
-            break;
-        case 10:
-            type = XDGLanguageLocaleSpanish;
-            break;
-        case 11:
-            type = XDGLanguageLocaleTurkish;
-            break;
-        case 12:
-            type = XDGLanguageLocaleRussian;
-            break;  
-        default:
-            type = XDGLanguageLocaleSimplifiedChinese;
-            break;
-    }
-    [XDGSDKSettings setLanguage:type];
+     [XDGCoreService langType:[NSNumber numberWithInt:langType]];
      NSLog(@"设置语言 %d", langType);
 }
 
@@ -142,6 +100,7 @@ void XDGCommonIOS::ShareImage(int32 type, FString imagePath){
             image = [UIImage imageWithContentsOfFile:str];
         }
 
+
         // 沙盒测试路径，代码测试用
         // NSString* path = [[NSBundle mainBundle] pathForResource:@"XDGResources" ofType:@"bundle"];
         // NSString* str = [path stringByAppendingString:@"/tds_apple_icon@3x.png"];
@@ -216,11 +175,18 @@ void XDGCommonIOS::GetRegionInfo(){
     });
 }
 
+void XDGCommonIOS::DevelopUrlInit(){
+   //测试代码--start 
+   [XDGCoreService setDevelopUrl]; 
+   XDGCommonIOS::InitSDK();
+   //测试代码--end
+}
+
 
 //-------ios 源代码-------
 @implementation XDGUE4CommonTool
 
- //0成功，1取消，2失败
+ //0成功, 1取消, 2失败
 + (void)shareWithResult:(NSError *)error cancel:(BOOL)cancel {
     if(error != nil){
         FXDGCommonModule::OnXDGSDKShareCompleted.Broadcast(2);

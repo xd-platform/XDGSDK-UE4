@@ -34,7 +34,7 @@ class XDGPAYMENT_API UXDGPaymentBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 	static void CheckRefundStatusWithUI();
 
-	//安卓独有方法
+	//安卓独有方法（sdk没测，没用的，先放着）
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 	static void RestorePurchase(FString purchaseToken,
 								FString productId,
@@ -45,7 +45,9 @@ class XDGPAYMENT_API UXDGPaymentBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 	static void PayWithWeb(FString serverId,
-							FString roleId);
+							FString roleId,
+							FString productId, 
+							FString extras);
 
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 	static void PayWithChannel(FString orderId,
@@ -53,21 +55,8 @@ class XDGPAYMENT_API UXDGPaymentBPLibrary : public UBlueprintFunctionLibrary
 								FString roleId,
 								FString serverId,
 								FString ext);
-
-	UFUNCTION(BlueprintCallable, Category = "XDGPayment") //安卓内嵌支付用
-	static void QueryInnerProductList(TArray<FString> productIds);
-
-	UFUNCTION(BlueprintCallable, Category = "XDGPayment") //安卓内嵌支付用
-	static void InlinePay(FString orderId,
-								FString productId,
-								FString productName,
-								FString region,
-								FString serverId,
-								FString roleId,
-								FString ext);
-
     
-	//iOS独有方法
+	//iOS独有方法（sdk没测，没用的，先放着）
 	UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 	static void PurchaseToken(FString transactionIdentifier,
 								FString productIdentifier,
