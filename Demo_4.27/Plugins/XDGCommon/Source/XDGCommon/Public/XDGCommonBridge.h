@@ -29,8 +29,10 @@ public:
 
 	virtual void SetCurrentUserPushServiceEnable(bool enable) = 0;
 	virtual bool IsCurrentUserPushServiceEnable() = 0;
-
 	virtual void GetRegionInfo() = 0;
+
+	virtual void EnableIDFA() = 0;  //初始化前设置
+	virtual void RequestIDFA() = 0; //初始化成功或登录成功后，请求IDFA弹框
 
 	virtual void DevelopUrlInit() = 0; //设置测试环境url初始化,开发测试用，发布版里面实现会注销
 	

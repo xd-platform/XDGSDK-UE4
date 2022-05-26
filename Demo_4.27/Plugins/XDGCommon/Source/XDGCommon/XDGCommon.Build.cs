@@ -84,6 +84,9 @@ public class XDGCommon : ModuleRules
 
 
 		 if (Target.Platform == UnrealTargetPlatform.IOS) {
+
+			
+
 			   PublicAdditionalFrameworks.Add(
                     new Framework(
 						"AdjustSdk",

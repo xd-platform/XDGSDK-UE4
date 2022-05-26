@@ -45,6 +45,9 @@ public:
 	bool IsCurrentUserPushServiceEnable();
 	void GetRegionInfo();
 
+	void EnableIDFA();
+	void RequestIDFA();
+
 	void DevelopUrlInit();
 };
 #endif 

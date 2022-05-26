@@ -3,17 +3,13 @@
 #### 1.添加Plugins文件夹里的插件
 ![plugins](./Demo_4.27/image/plugins.png)
 
-#### 2.配置Bootstrap数据
-如果看不到该配置，请重启UE4开发工具。
-![boot](./Demo_4.27/image/boot.png)
 
-
-#### 3.配置iOS数据
+#### 2.配置iOS数据
 把 `XDGCommon/Source/XDGCommon/iOS/iOSConfigs` 文件夹里的 `GoogleService-Info.plist` 和 `XDG-Info.plist` 配置成自己的文件。
 
 把 `XDGCommon/Source/XDGCommon/XDGCommon_iOS_UPL.xml` 里的 `CFBundleURLSchemes`值配置成自己的参数。
 
-#### 4.配置Android数据
+#### 3.配置Android数据
 把 `XDGCommon/Source/XDGCommon/Android/assets` 文件夹里的  `XDG_info.json`  
 和 `XDGAccount/Source/XDGAccount/Android/googleJson` 文件夹里的 `google-services.json` 配置成自己的文件。
 
@@ -67,21 +63,26 @@ static void StoreReview();
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void Report(FString serverId, FString roleId, FString roleName);
 
+//TapDB 统计用户，登录成功后使用
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void TrackUser(FString userId);
 
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void TrackRole(FString serverId, FString roleId, FString roleName, int32 level);
 
+//自定义事件埋点
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void TrackEvent(FString eventName);
 
+//成就埋点
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void TrackAchievement();
 
+//完成新手引导埋点
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void EventCompletedTutorial();
 
+//穿件角色埋点
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void EventCreateRole();
 
@@ -109,6 +110,13 @@ static bool IsCurrentUserPushServiceEnable();
 //获取位置信息
 UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 static void GetRegionInfo();
+
+UFUNCTION(BlueprintCallable, Category = "XDGCommon")
+static void EnableIDFA();  //设置启用IDFA， 初始化前调用
+
+UFUNCTION(BlueprintCallable, Category = "XDGCommon")
+static void RequestIDFA();  //请求IDFA弹框
+
 ```
 #### 2.接口回调在 `XDGCommon/Source/XDGCommon/Public/XDGCommon.h` 中
 
@@ -232,11 +240,8 @@ void ADemoGameModeBase::OnXDGSDKShareCompleted(const int32 code){
 #### 1.接口使用位于 `XDGAccount/Source/XDGAccount/Public/XDGAccountBPLibrary.h` 中
 
 ```
-//弹框登录
-UFUNCTION(BlueprintCallable, Category = "XDGAccount")
-static void Login();
-
-//单独调用第三方登录，可传如下字符串参数
+//单独调用第三方登录 
+// "DEFAULT"  以上次登录成功的信息自动登录
 // "TAPTAP"
 // "GOOGLE"
 // "FACEBOOK"
@@ -246,6 +251,10 @@ static void Login();
 // "GUEST"
 UFUNCTION(BlueprintCallable, Category = "XDGAccount")
 static void LoginByType(FString loginType);
+
+//SDK自带弹框弹框登录(不推荐)
+UFUNCTION(BlueprintCallable, Category = "XDGAccount")
+static void Login();
 
 //绑定状态回调（登出，解绑等）
 UFUNCTION(BlueprintCallable, Category = "XDGAccount")
@@ -266,6 +275,11 @@ static void Logout();
 //获取sessionToken
 UFUNCTION(BlueprintCallable, Category = "XDGAccount")
 static void LoginSync();
+
+//打开注销账号页面
+UFUNCTION(BlueprintCallable, Category = "XDGAccount")
+static void OpenAccountCancellation();
+
 ```
 
 #### 2. 接口回调位于 `XDGAccount/Source/XDGAccount/Public/XDGAccount.h` 中
@@ -291,9 +305,6 @@ static FXDGSDKGetUserFailed OnXDGSDKGetUserFailed;
 UPROPERTY(BlueprintAssignable, Category = "XDGAccount")
 static FXDGSDKUserStateChanged OnXDGSDKUserStateChanged;
 
-//sessionToken 回调
-UPROPERTY(BlueprintAssignable, Category = "XDGAccount")
-static FXDGSDKLoginSync OnXDGSDKLoginSync;
 ```
 
 ## XDGPayment 使用
@@ -306,64 +317,46 @@ static FXDGSDKLoginSync OnXDGSDKLoginSync;
 #### 1.接口使用
 
 ```
-//下面是ios 安卓都有的方法（5个）
-UFUNCTION(BlueprintCallable, Category = "XDGPayment")
-static void QueryWithProductIdArray(TArray<FString> productIds);
-
+//苹果支付 或 谷歌支付 （苹果支付推荐使用）
 UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 static void PayWithProduct(FString orderId,
-							FString productId,
-							FString roleId,
-							FString serverId,
-							FString ext);
+                            FString productId,
+                            FString roleId,
+                            FString serverId,
+                            FString ext);
 
+//安卓网页支付（安卓支付这个推荐使用）
 UFUNCTION(BlueprintCallable, Category = "XDGPayment")
-static void QueryRestoredPurchases();
+static void PayWithWeb(FString serverId,
+                        FString roleId,
+                        FString productId, 
+                        FString extras);
 
+//检查补款信息(无弹框)
 UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 static void CheckRefundStatus();
 
+//检查补款信息(SDK自带弹框，会卡游戏使用流程)
 UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 static void CheckRefundStatusWithUI();
 
-//-------------------------------------------------------------
-
-//下面是安卓独有方法(3个)
-UFUNCTION(BlueprintCallable, Category = "XDGPayment")
-static void RestorePurchase(FString purchaseToken,
-							FString productId,
-							FString orderId,
-							FString roleId,
-							FString serverId,
-							FString ext);
-
-UFUNCTION(BlueprintCallable, Category = "XDGPayment")
-static void PayWithWeb(FString serverId,
-						FString roleId);
-
+//安卓渠道支付(根据配置用谷歌还是网页支付)
 UFUNCTION(BlueprintCallable, Category = "XDGPayment")
 static void PayWithChannel(FString orderId,
-							FString productId,
-							FString roleId,
-							FString serverId,
-							FString ext);
-
-//-------------------------------------------------------------
-
-//下面是iOS独有方法(1个)
+                            FString productId,
+                            FString roleId,
+                            FString serverId,
+                            FString ext);
+                            
+//查询苹果或谷歌商品信息
 UFUNCTION(BlueprintCallable, Category = "XDGPayment")
-static void PurchaseToken(FString transactionIdentifier,
-							FString productIdentifier,
-							FString orderId,
-							FString roleId,
-							FString serverId,
-							FString ext);
+static void QueryWithProductIdArray(TArray<FString> productIds);
 ```
 
 #### 2. 接口回调
 
 ```
-//支付成功
+//支付流程完成 (游戏成功以服务端通知为准，服务端需要对接接口)
 UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
 static FXDGSDKPaymentSucceed OnXDGSDKPaymentSucceed;
 
@@ -388,6 +381,7 @@ UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
 static FXDGSDKQueryRestoredPurchasesFailed OnXDGSDKQueryRestoredPurchasesFailed;
 
 //网页支付回调
+//0完成，1取消，2处理中，其他失败
 UPROPERTY(BlueprintAssignable, Category = "XDGPayment")
 static FXDGSDKPayWithWebCompleted OnXDGSDKPayWithWebCompleted;
 

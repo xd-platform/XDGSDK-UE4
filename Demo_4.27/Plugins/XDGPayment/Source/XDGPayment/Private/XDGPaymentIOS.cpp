@@ -63,10 +63,10 @@ void XDGPaymentIOS::PayWithProduct(FString orderId,
            NSString* rid = roleId.GetNSString();     
 
            //测试代码---start
-            oid = @"";
-            NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
-            rid = [df objectForKey:@"demo_tmp_userId"];
-            NSLog(@"payment saved userId df get:%@", rid);
+            // oid = @"";
+            // NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
+            // rid = [df objectForKey:@"demo_tmp_userId"];
+            // NSLog(@"payment saved userId df get:%@", rid);
            //测试代码---end
 
         [XDGPayment payWithOrderId:oid productId:pid roleId:rid serverId:serverId.GetNSString() ext:ext.GetNSString() completionHandler:^(XDGOrderInfo * _Nonnull orderInfo, NSError * _Nonnull error) {
@@ -96,7 +96,7 @@ void XDGPaymentIOS::QueryRestoredPurchases(){
             NSLog(@"查询成功 %@", strJson);
 
         }else{
-            FXDGPaymentModule::OnXDGSDKQueryRestoredPurchasesFailed.Broadcast(-1, "失败");
+            FXDGPaymentModule::OnXDGSDKQueryRestoredPurchasesFailed.Broadcast(-1, TEXT("query fail"));
             NSLog(@"查询失败");
         }
     }];
@@ -208,7 +208,7 @@ void XDGPaymentIOS::PurchaseToken(FString transactionIdentifier,
         FXDGPaymentModule::OnXDGSDKPaymentSucceed.Broadcast(UTF8_TO_TCHAR([orderId UTF8String]), UTF8_TO_TCHAR([productId UTF8String]), UTF8_TO_TCHAR([serverId UTF8String]), UTF8_TO_TCHAR([roleId UTF8String]));
         NSLog(@"成功了");
     }else{
-        FXDGPaymentModule::OnXDGSDKPaymentFailed.Broadcast(-1, "失败");
+        FXDGPaymentModule::OnXDGSDKPaymentFailed.Broadcast(-1, TEXT("pay fail"));
          NSLog(@"失败了2");
     }
 }

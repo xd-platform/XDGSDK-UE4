@@ -84,13 +84,13 @@ public class XDGAccountUnreal4 {
 
 
             //测试代码--start
-             if (XDGCommonUnreal4.tmpActivity != null) {
-                SharedPreferences preferences = XDGCommonUnreal4.tmpActivity.getPreferences(0);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("demo_tmp_sp_userId", xdgUser.getId());
-                editor.apply();
-                print("saved userId: " + xdgUser.getId());
-             }
+            //  if (XDGCommonUnreal4.tmpActivity != null) {
+            //     SharedPreferences preferences = XDGCommonUnreal4.tmpActivity.getPreferences(0);
+            //     SharedPreferences.Editor editor = preferences.edit();
+            //     editor.putString("demo_tmp_sp_userId", xdgUser.getId());
+            //     editor.apply();
+            //     print("saved userId: " + xdgUser.getId());
+            //  }
             //测试代码--end
 
 

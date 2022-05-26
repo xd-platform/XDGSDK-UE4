@@ -43,12 +43,12 @@ public class XDGPaymentUnreal4 {
 
     public static void payWithProduct(String orderId, String productId, String roleId, String serverId, String ext) {
         //测试代码---start
-        orderId = "";
-        if (XDGCommonUnreal4.tmpActivity != null) {
-            SharedPreferences preferences = XDGCommonUnreal4.tmpActivity.getPreferences(0);
-            roleId = preferences.getString("demo_tmp_sp_userId", "");
-            print("payment saved userId: " + roleId);
-        }
+        // orderId = "";
+        // if (XDGCommonUnreal4.tmpActivity != null) {
+        //     SharedPreferences preferences = XDGCommonUnreal4.tmpActivity.getPreferences(0);
+        //     roleId = preferences.getString("demo_tmp_sp_userId", "");
+        //     print("payment saved userId: " + roleId);
+        // }
         //测试代码---end
 
         final String oid = orderId;
@@ -144,18 +144,18 @@ public class XDGPaymentUnreal4 {
     public static void payWithWeb(String serverId, String roleId, String productId, String extras) {
 
          //测试代码---start
-         if (productId.equals("1")) {
-            productId = "com.xd.sdkdemo1.stone60";
-        } else if (productId.equals("2")) {
-            productId = "com.xd.sdkdemo1.stone300";
-        } else {
-            productId = "com.xd.sdkdemo1.stone30";
-        }
-        if (XDGCommonUnreal4.tmpActivity != null) {
-            SharedPreferences preferences = XDGCommonUnreal4.tmpActivity.getPreferences(0);
-            roleId = preferences.getString("demo_tmp_sp_userId", "");
-            print("payment saved userId: " + roleId);
-        }
+        //  if (productId.equals("1")) {
+        //     productId = "com.xd.sdkdemo1.stone60";
+        // } else if (productId.equals("2")) {
+        //     productId = "com.xd.sdkdemo1.stone300";
+        // } else {
+        //     productId = "com.xd.sdkdemo1.stone30";
+        // }
+        // if (XDGCommonUnreal4.tmpActivity != null) {
+        //     SharedPreferences preferences = XDGCommonUnreal4.tmpActivity.getPreferences(0);
+        //     roleId = preferences.getString("demo_tmp_sp_userId", "");
+        //     print("payment saved userId: " + roleId);
+        // }
         //测试代码---end
 
 

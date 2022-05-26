@@ -17,6 +17,9 @@
 #import <TDSGlobalSDKCommonKit/NSDictionary+TDSGlobalJson.h>
 #import <XDGCommonSDK/XDGCoreService.h>
 
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <AdSupport/AdSupport.h>
+#import <TDSGlobalSDKCommonKit/TDSGlobalDeviceInfoTool.h>
 
 class  XDGCommonIOS : public XDGCommonBridge
 {
@@ -44,8 +47,11 @@ public:
 	void SetCurrentUserPushServiceEnable(bool enable);
 	bool IsCurrentUserPushServiceEnable();
 	void GetRegionInfo();
+	
+	void EnableIDFA();
+	void RequestIDFA();
 
-	 void DevelopUrlInit();
+	void DevelopUrlInit();
 };
 
 @interface XDGUE4CommonTool : NSObject

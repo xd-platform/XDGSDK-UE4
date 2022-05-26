@@ -83,12 +83,24 @@ void UXDGCommonBPLibrary::GetRegionInfo(){
     GetXDGCommonBridge()->GetRegionInfo();
 }
 
+void UXDGCommonBPLibrary::EnableIDFA(){
+    GetXDGCommonBridge()->EnableIDFA();
+
+    //测试代码--start 
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,  TEXT("设置IDFA true"), true, FVector2D(2, 2));
+    //测试代码--end
+}
+
+void UXDGCommonBPLibrary::RequestIDFA(){
+    GetXDGCommonBridge()->RequestIDFA();
+}
+
  void UXDGCommonBPLibrary::DevelopUrlInit(){
     GetXDGCommonBridge()->DevelopUrlInit();
  }
 
  void UXDGCommonBPLibrary::ShowTest(){
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,  TEXT("OnXDGSDKInitSucceed3 中文 ศูนย์ความปลอดภัยบัญชี"), true, FVector2D(2, 2));
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,  TEXT("OnXDGSDKInitSucceed3 中文 ศูนย์ความปลอดภัยบัญชี"), true, FVector2D(2, 2));
     // GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "OnXDGSDKInitSucceed 中文 ศูนย์ความปลอดภัยบัญชี");
 }
 

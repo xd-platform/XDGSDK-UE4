@@ -175,10 +175,26 @@ void XDGCommonIOS::GetRegionInfo(){
     });
 }
 
+void XDGCommonIOS::EnableIDFA(){
+ [XDGSDKSettings setAdvertiserIDCollectionEnable:YES];
+}
+
+void XDGCommonIOS::RequestIDFA(){
+ [XDGSDKSettings setAdvertiserIDCollectionEnable:YES];
+ [TDSGlobalDeviceInfoTool requestWithCompletionHandler:^(NSUInteger status) {
+        NSLog(@"idfa status: %lu", (unsigned long)status);
+        if (status == 3) {
+             NSString* deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+            NSLog(@"idfa deviceId: %@", deviceId);
+        }
+   }];
+}
+
+
 void XDGCommonIOS::DevelopUrlInit(){
    //测试代码--start 
-   [XDGCoreService setDevelopUrl]; 
-   XDGCommonIOS::InitSDK();
+//    [XDGCoreService setDevelopUrl]; 
+//    XDGCommonIOS::InitSDK();
    //测试代码--end
 }
 

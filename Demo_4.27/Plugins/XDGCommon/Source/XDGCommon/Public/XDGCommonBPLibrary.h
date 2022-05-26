@@ -66,6 +66,12 @@ class XDGCOMMON_API UXDGCommonBPLibrary : public UBlueprintFunctionLibrary
 	static void GetRegionInfo();
 
 	UFUNCTION(BlueprintCallable, Category = "XDGCommon")
+	static void EnableIDFA();  //设置启用IDFA， 初始化前调用
+
+	UFUNCTION(BlueprintCallable, Category = "XDGCommon")
+	static void RequestIDFA();  //请求IDFA弹框
+
+	UFUNCTION(BlueprintCallable, Category = "XDGCommon")
 	static void DevelopUrlInit(); //设置测试环境url初始化，开发测试用，发布版里面实现会注销
 
 	UFUNCTION(BlueprintCallable, Category = "XDGCommon")

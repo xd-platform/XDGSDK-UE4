@@ -346,6 +346,13 @@ void XDGCommonAndroid::GetRegionInfo(){
     env->DeleteLocalRef(jXDSDKUnreal4Class);   
 }
 
+void XDGCommonAndroid::EnableIDFA(){
+   //安卓空，没有IDFA
+}
+
+void XDGCommonAndroid::RequestIDFA(){
+   //安卓空，没有IDFA
+}
 
 void XDGCommonAndroid::DevelopUrlInit(){
     JNIEnv *env = FAndroidApplication::GetJavaEnv();

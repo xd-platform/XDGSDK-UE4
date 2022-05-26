@@ -52,7 +52,6 @@ public class XDGCommonUnreal4 {
         print("点击初始化");
 
         if (!XDGSDK.isInitialized()) {
-            // 要在主线程执行
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
@@ -78,7 +77,7 @@ public class XDGCommonUnreal4 {
         }
 
         //测试代码---start
-          tmpActivity = gameActivity;
+        // tmpActivity = gameActivity;
         //测试代码---end
     }
 
@@ -266,8 +265,8 @@ public class XDGCommonUnreal4 {
 
     public static void developUrlInit(final Activity activity) {
         //测试代码--start
-        EnvHelper.setApiEnv(EnvHelper.EnvEnum.Dev); //设置测试环境
-        initSDK(activity);
+        // EnvHelper.setApiEnv(EnvHelper.EnvEnum.Dev); //设置测试环境
+        // initSDK(activity);
         //测试代码--end
     }
 
